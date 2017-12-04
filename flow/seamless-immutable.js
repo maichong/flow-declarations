@@ -1,42 +1,55 @@
 // TODO
 
 declare module 'seamless-immutable' {
-  declare type MergeConfig = {
+  declare interface MergeConfig {
     deep?: boolean,
     merger?: (a: any, b: any, config: any) => any
   }
 
-  declare type AsMutableOptions = {
+  declare interface AsMutableOptions {
     deep?: boolean,
   }
 
-  declare type Immutable<T: Object | Array<*>> = T & {
-    // Array methods
-    flatMap(fn: Function): Array<any>;
-    asObject(fn: Function): Object;
-    asMutable(opts?: AsMutableOptions): Array<any>;
-    // Object methods
-    merge(collection: Array<any> | Object, config?: MergeConfig): Object;
-    set(key: string, value: any): Object;
-    setIn(keyPath: Array<string>, value: any): Object;
-    update(key: string, fn: Function): Object;
-    updateIn(keyPath: Array<string>, fn: Function): Object;
-    without(fn: Function): Object;
-    without(keys: Array<string>): Object;
-    without(...keys: Array<string>): Object;
-    asMutable(opts?: AsMutableOptions): Array<any> | Object;
-  };
+  declare interface ImmutableObjectMixin<T> {
+    merge(collection: Array<any> | Object, config?: MergeConfig): ImmutableObject<T>;
 
-  declare function from<T: Object | Array<*>>(spec: T): Immutable<T>;
+    set(key: string, value: any): ImmutableObject<T>;
 
-  declare type Default = {
-    (data: Object): Immutable<Object>;
-    (data: Array<*>): Immutable<Array<*>>;
-    from: typeof from;
+    setIn(keyPath: Array<string>, value: any): ImmutableObject<T>;
+
+    getIn(keyPath: Array<string>, defaultValue?: any): any;
+
+    update(key: string, fn: Function): ImmutableObject<T>;
+
+    updateIn(keyPath: Array<string>, fn: Function): ImmutableObject<T>;
+
+    without(filter: (value: any, key: string) => boolean): ImmutableObject<T>;
+
+    without(keys: Array<string>): ImmutableObject<T>;
+
+    without(...keys: Array<string>): ImmutableObject<T>;
+
+    asMutable(opts?: AsMutableOptions): T;
+  }
+
+  declare interface ImmutableArrayMixin<T> {
+    flatMap<TTarget>(mapFunction: (item: T) => TTarget[]): ImmutableArray<TTarget>;
+
+    asObject(fn: (item: T) => [string, any]): ImmutableObject<any>;
+
+    asMutable(opts?: AsMutableOptions): Array<T>;
+  }
+
+  declare type ImmutableObject<T> = T & ImmutableObjectMixin<T>;
+  declare type ImmutableArray<T> = T[] & ImmutableArrayMixin<T>;
+
+  declare var exports: {
+    <T>(data: T): ImmutableObject<T>;
+    <T>(data: T[]): ImmutableArray<T>;
+    from<T>(value: T): ImmutableObject<T>,
+    from<T>(value: T[]): ImmutableArray<T>,
     isImmutable: (x: any) => boolean,
     asMutable: (x: Object, opts?: AsMutableOptions) => Object,
     asMutable: (x: Object[], opts?: AsMutableOptions) => Object[],
   };
-
-  declare var exports: Default;
 }
