@@ -1,5 +1,4 @@
 {
-  "bluebird": "v3.x.x",
   "bson": "v1.x.x",
   "chalk": "v2.x.x",
   "color": "v0.7.x",

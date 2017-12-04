@@ -52,18 +52,15 @@ function copy(name, version) {
   let srcFile = Path.join(srcDir, subDir, `${name}_${version}.js`);
   if (!isFile.sync(srcFile)) throw new Error('Can not find flow-typed definition file!');
 
-  let destDir = Path.join(flowDir, name);
-  if (isDirectory.sync(destDir)) {
-    del.sync(destDir);
+  let destFile = Path.join(flowDir, name + '.js');
+  if (isFile.sync(destFile)) {
+    del.sync(destFile);
   }
-
-  mkdirp.sync(destDir);
 
   let data = fs.readFileSync(srcFile, 'utf8');
 
   data = `// copy from https://github.com/flowtype/flow-typed/blob/master/definitions/npm/${name}_${version}/${subDir}/${name}_${version}.js\n\n` + data;
-
-  let destFile = Path.join(destDir, name + '.js');
+  
   fs.writeFileSync(destFile, data);
 }
 
