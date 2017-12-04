@@ -7,6 +7,5 @@ declare module 'pinyin' {
   declare export var STYLE_TO3NE: string;
   declare export var STYLE_INITIALS: string;
   declare export var STYLE_FIRST_LETTER: string;
-  declare export var exports: (input: string, opts?: Object) => Array<string[]>;
-
+  declare export default (input: string, opts?: Object) => Array < string[] >;
 }
