@@ -50,6 +50,6 @@ declare module 'seamless-immutable' {
     from<T>(value: T[]): ImmutableArray<T>,
     isImmutable: (x: any) => boolean,
     asMutable: (x: Object, opts?: AsMutableOptions) => Object,
-    asMutable: (x: Object[], opts?: AsMutableOptions) => Object[],
+    asMutable: (x: any[], opts?: AsMutableOptions) => any[],
   };
 }
