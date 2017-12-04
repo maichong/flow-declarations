@@ -1,7 +1,7 @@
 declare module 'react-select' {
   declare type SelectOption = {
     value: string | number,
-    label: string,
+    label: React$Node,
     clearableValue?: boolean,
   };
   declare type Props = {
