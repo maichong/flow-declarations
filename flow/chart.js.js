@@ -1,10 +1,19 @@
 // Convented from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/chart.js/index.d.ts
 
 declare module 'chart.js' {
-  declare type ChartType = 'line' | 'bar' | 'radar' | 'doughnut' | 'polarArea' | 'bubble' | 'pie';
-  declare type TimeUnit = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year';
-  declare type ScaleType = 'category' | 'linear' | 'logarithmic' | 'time' | 'radialLinear';
-  declare type PointStyle =
+  declare export type ChartType = 'line' | 'bar' | 'radar' | 'doughnut' | 'polarArea' | 'bubble' | 'pie';
+  declare export type TimeUnit =
+    'millisecond'
+    | 'second'
+    | 'minute'
+    | 'hour'
+    | 'day'
+    | 'week'
+    | 'month'
+    | 'quarter'
+    | 'year';
+  declare export type ScaleType = 'category' | 'linear' | 'logarithmic' | 'time' | 'radialLinear';
+  declare export type PointStyle =
     'circle'
     | 'cross'
     | 'crossRot'
@@ -15,17 +24,17 @@ declare module 'chart.js' {
     | 'rectRot'
     | 'star'
     | 'triangle';
-  declare type PositionType = 'left' | 'right' | 'top' | 'bottom';
-  declare type ChartColor = string | CanvasGradient | CanvasPattern | string[];
+  declare export type PositionType = 'left' | 'right' | 'top' | 'bottom';
+  declare export type ChartColor = string | CanvasGradient | CanvasPattern | string[];
 
-  declare type ChartArea = {
+  declare export interface ChartArea {
     top: number,
     right: number,
     bottom: number,
     left: number
   }
 
-  declare type ChartLegendItem = {
+  declare export interface ChartLegendItem {
     text?: string,
     fillStyle?: string,
     hidden?: boolean,
@@ -37,19 +46,19 @@ declare module 'chart.js' {
     strokeStyle?: string,
   }
 
-  declare type ChartTooltipItem = {
+  declare export interface ChartTooltipItem {
     xLabel?: string,
     yLabel?: string,
     datasetIndex?: number,
     index?: number,
   }
 
-  declare type ChartTooltipLabelColor = {
+  declare export interface ChartTooltipLabelColor {
     borderColor: ChartColor,
     backgroundColor: ChartColor,
   }
 
-  declare type ChartTooltipCallback = {
+  declare export interface ChartTooltipCallback {
     beforeTitle?: (item: ChartTooltipItem[], data: ChartData) => string | string[],
     title?: (item: ChartTooltipItem[], data: ChartData) => string | string[],
     afterTitle?: (item: ChartTooltipItem[], data: ChartData) => string | string[],
@@ -65,28 +74,28 @@ declare module 'chart.js' {
     afterFooter?: (item: ChartTooltipItem[], data: ChartData) => string | string[],
   }
 
-  declare type ChartAnimationParameter = {
+  declare export interface ChartAnimationParameter {
     chartInstance?: any,
     animationObject?: any,
   }
 
-  declare type ChartPoint = {
+  declare export interface ChartPoint {
     x?: number | string | Date,
     y?: number,
   }
 
-  declare type ChartConfiguration = {
+  declare export interface ChartConfiguration {
     type?: ChartType | string,
     data?: ChartData,
     options?: ChartOptions,
   }
 
-  declare type ChartData = {
+  declare export interface ChartData {
     labels?: Array<string | string[]>,
     datasets?: ChartDataSets[]
   }
 
-  declare type ChartOptions = {
+  declare export interface ChartOptions {
 
     responsive?: boolean,
     responsiveAnimationDuration?: number,
@@ -111,7 +120,7 @@ declare module 'chart.js' {
     plugins?: any
   }
 
-  declare type ChartFontOptions = {
+  declare export interface ChartFontOptions {
     defaultFontColor?: ChartColor,
     defaultFontFamily?: string,
     defaultFontSize?: number,
@@ -119,7 +128,7 @@ declare module 'chart.js' {
   }
 
 
-  declare type ChartTitleOptions = {
+  declare export interface ChartTitleOptions {
     display?: boolean,
     position?: PositionType,
     fullWdith?: boolean,
@@ -131,7 +140,7 @@ declare module 'chart.js' {
     text?: string,
   }
 
-  declare type ChartLegendOptions = {
+  declare export interface ChartLegendOptions {
     display?: boolean,
     position?: PositionType,
     fullWidth?: boolean,
@@ -141,7 +150,7 @@ declare module 'chart.js' {
     reverse?: boolean
   }
 
-  declare type ChartLegendLabelOptions = {
+  declare export interface ChartLegendLabelOptions {
     boxWidth?: number,
     fontSize?: number,
     fontStyle?: string,
@@ -151,7 +160,7 @@ declare module 'chart.js' {
     generateLabels?: (chart: any) => any,
   }
 
-  declare type  ChartTooltipOptions = {
+  declare export interface ChartTooltipOptions {
     enabled?: boolean,
     custom?: (a: any) => void,
     mode?: string,
@@ -189,15 +198,14 @@ declare module 'chart.js' {
     borderWidth?: number,
   }
 
-
-  declare type ChartHoverOptions = {
+  declare export interface ChartHoverOptions {
     mode?: string,
     animationDuration?: number,
     intersect?: boolean,
     onHover?: (active: any) => void,
   }
 
-  declare type ChartAnimationObject = {
+  declare export interface ChartAnimationObject {
     currentStep?: number,
     numSteps?: number,
     easing?: string,
@@ -206,14 +214,14 @@ declare module 'chart.js' {
     onAnimationComplete?: (arg: any) => void,
   }
 
-  declare type ChartAnimationOptions = {
+  declare export interface ChartAnimationOptions {
     duration?: number,
     easing?: string,
     onProgress?: (chart: any) => void,
     onComplete?: (chart: any) => void,
   }
 
-  declare type ChartElementsOptions = {
+  declare export interface ChartElementsOptions {
     point?: ChartPointOptions,
     line?: ChartLineOptions,
     arc?: ChartArcOptions,
@@ -221,13 +229,13 @@ declare module 'chart.js' {
   }
 
 
-  declare type ChartArcOptions = {
+  declare export interface ChartArcOptions {
     backgroundColor?: ChartColor,
     borderColor?: ChartColor,
     borderWidth?: number,
   }
 
-  declare type ChartLineOptions = {
+  declare export interface ChartLineOptions {
     tension?: number,
     backgroundColor?: ChartColor,
     borderWidth?: number,
@@ -241,7 +249,7 @@ declare module 'chart.js' {
     stepped?: boolean,
   }
 
-  declare type ChartPointOptions = {
+  declare export interface ChartPointOptions {
     radius?: number,
     pointStyle?: PointStyle,
     backgroundColor?: ChartColor,
@@ -252,25 +260,25 @@ declare module 'chart.js' {
     hoverBorderWidth?: number,
   }
 
-  declare type ChartRectangleOptions = {
+  declare export interface ChartRectangleOptions {
     backgroundColor?: ChartColor,
     borderWidth?: number,
     borderColor?: ChartColor,
     borderSkipped?: string,
   }
 
-  declare type ChartLayoutOptions = {
+  declare export interface ChartLayoutOptions {
     padding?: ChartLayoutPaddingObject | number,
   }
 
-  declare type ChartLayoutPaddingObject = {
+  declare export interface ChartLayoutPaddingObject {
     top?: number,
     right?: number,
     bottom?: number,
     left?: number,
   }
 
-  declare type GridLineOptions = {
+  declare export interface GridLineOptions {
     display?: boolean,
     color?: ChartColor,
     borderDash?: number[],
@@ -287,7 +295,7 @@ declare module 'chart.js' {
     offsetGridLines?: boolean,
   }
 
-  declare type ScaleTitleOptions = {
+  declare export interface ScaleTitleOptions {
     display?: boolean,
     labelString?: string,
     fontColor?: ChartColor,
@@ -296,7 +304,7 @@ declare module 'chart.js' {
     fontStyle?: string,
   }
 
-  declare type TickOptions = {
+  declare export interface TickOptions {
     autoSkip?: boolean,
     autoSkipPadding?: boolean,
     callback?: (value: any, index: any, values: any) => string | number,
@@ -314,13 +322,14 @@ declare module 'chart.js' {
     min?: any,
     max?: any,
   }
-  declare type AngleLineOptions = {
+
+  declare export interface AngleLineOptions {
     display?: boolean,
     color?: ChartColor,
     lineWidth?: number,
   }
 
-  declare type PointLabelOptions = {
+  declare export interface PointLabelOptions {
     callback?: (arg: any) => any,
     fontColor?: ChartColor,
     fontFamily?: string,
@@ -328,7 +337,7 @@ declare module 'chart.js' {
     fontStyle?: string,
   }
 
-  declare type LinearTickOptions = TickOptions & {
+  declare export type LinearTickOptions = TickOptions & {
     beginAtZero?: boolean,
     min?: number,
     max?: number,
@@ -338,13 +347,13 @@ declare module 'chart.js' {
     suggestedMax?: number,
   }
 
-  declare type LogarithmicTickOptions = TickOptions & {
+  declare export type LogarithmicTickOptions = TickOptions & {
     min?: number,
     max?: number,
   }
 
 
-  declare type ChartDataSets = {
+  declare export interface ChartDataSets {
     cubicInterpolationMode?: 'default' | 'monotone',
     backgroundColor?: ChartColor | ChartColor[],
     borderWidth?: number | number[],
@@ -382,7 +391,7 @@ declare module 'chart.js' {
     spanGaps?: boolean,
   }
 
-  declare type ChartScales = {
+  declare export interface ChartScales {
     type?: ScaleType | string,
     display?: boolean,
     position?: PositionType | string,
@@ -393,7 +402,7 @@ declare module 'chart.js' {
     yAxes?: ChartYAxe[],
   }
 
-  declare type CommonAxe = {
+  declare export interface CommonAxe {
     type?: ScaleType | string,
     display?: boolean,
     id?: string,
@@ -419,24 +428,24 @@ declare module 'chart.js' {
     afterFit?: (scale?: any) => void,
   }
 
-  declare type ChartXAxe = CommonAxe & {
+  declare export type ChartXAxe = CommonAxe & {
     categoryPercentage?: number,
     barPercentage?: number,
     time?: TimeScale,
   }
 
-  // tslint:disable-next-line no-empty-declare type
-  declare type ChartYAxe = CommonAxe & {}
+  // tslint:disable-next-line no-empty-declare export type
+  declare export type ChartYAxe = CommonAxe & {}
 
-  declare type LinearScale = ChartScales & {
+  declare export type LinearScale = ChartScales & {
     ticks?: LinearTickOptions,
   }
 
-  declare type LogarithmicScale = ChartScales & {
+  declare export type LogarithmicScale = ChartScales & {
     ticks?: LogarithmicTickOptions,
   }
 
-  declare type TimeDisplayFormat = {
+  declare export interface TimeDisplayFormat {
     millisecond?: string,
     second?: string,
     minute?: string,
@@ -448,7 +457,7 @@ declare module 'chart.js' {
     year?: string,
   }
 
-  declare type TimeScale = ChartScales & {
+  declare export type TimeScale = ChartScales & {
     displayFormats?: TimeDisplayFormat,
     isoWeekday?: boolean,
     max?: string,
@@ -461,19 +470,19 @@ declare module 'chart.js' {
     minUnit?: TimeUnit,
   }
 
-  declare type RadialLinearScale = {
+  declare export interface RadialLinearScale {
     lineArc?: boolean,
     angleLines?: AngleLineOptions,
     pointLabels?: PointLabelOptions,
     ticks?: TickOptions,
   }
 
-  declare type Size = {
+  declare export interface Size {
     height: number,
     width: number,
   }
 
-  declare type PluginServiceRegistrationOptions = {
+  declare export interface PluginServiceRegistrationOptions {
     beforeInit?: (chartInstance: Chart) => void,
     afterInit?: (chartInstance: Chart) => void,
 

@@ -80,5 +80,6 @@ declare module 'react-select' {
     wrapperStyle?: any, // optional style to apply to the component wrapper
   };
   declare export default class Select extends React$Component<Props> {
+  static Creatable: Class<Select>;
   }
 }
