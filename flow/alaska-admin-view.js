@@ -40,12 +40,10 @@ declare type Alaska$view$User = {
 declare type Alaska$view$Field = {
   +label: string,
   +path: string,
-  +required: boolean,
+  +required?: boolean,
   +cell: string,
   +view: string,
   +filter: string,
-  +service: string,
-  +model: string,
   +plain: string,
   +default?: any,
   +group?: string,
@@ -62,7 +60,7 @@ declare type Alaska$view$Field = {
   // fields
   // relationship
   +filters?: Object,
-  +ref?: string,
+  +model?: string,
   // select
   +options?: Alaska$SelectField$option[],
   +multi?: boolean,
