@@ -6,7 +6,7 @@ declare type Alaska$SelectField$Props = {
   allowCreate?: boolean,
   disabled?: boolean,
   multi?: boolean,
-  onChange: (value: Alaska$SelectField$value) => void,
+  onChange: (value: any) => any,
   loadOptions?: Alaska$SelectField$loadOptionsFn,
   value: Alaska$SelectField$value,
   options?: Alaska$SelectField$option[]
