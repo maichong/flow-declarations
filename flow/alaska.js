@@ -454,7 +454,7 @@ declare class Alaska$Model extends events$EventEmitter {
 
   static pre(action: string, fn: Function): void;
   static post(action: string, fn: Function): void;
-  static register(modelName: string): Promise<void>;
+  static register(): Promise<void>;
   static underscoreMethod(field: string, name: string, fn: Function): void;
   static createFilters(search: string, filters?: Object | string): Alaska$filters;
   static createFiltersByContext(ctx: Alaska$Context, state?: Object): Alaska$filters;
