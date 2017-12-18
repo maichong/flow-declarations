@@ -5,18 +5,20 @@
  * @author Rong <chaorong@maichong.it>
  */
 
-declare type ObjectModel = {
+declare interface ObjectModel {
   id: string,
   project: string,
   library: string,
   version: string,
   title: string,
   desc: string,
-  share: boolean
+  share: boolean,
+  createdAt: Date
 }
 
-declare type Field = {
+declare interface Field {
   id: string,
+  project: string,
   library: string,
   version: string,
   ref: string,
@@ -27,43 +29,51 @@ declare type Field = {
   default: string,
   mock: string,
   mockResult: string,
-  desc: string
+  desc: string,
+  options: Object
 }
 
-declare type Tuple = {
+declare interface Tuple {
   id: string,
   project: string,
   library: string,
   version: string,
   title: string,
   desc: string,
-  share: boolean
+  share: boolean,
+  createdAt: Date
 }
 
-declare type Scope = {
+declare interface Scope {
   id: string,
+  project: string,
   library: string,
   version: string,
   object: string,
   title: string,
-  fields: ApiField[]
+  fields: ApiField[],
+  share: boolean,
+  createdAt: Date
 }
 
-declare type Route = {
+declare interface Route {
+  id: string,
   library: string,
   version: string,
   title: string,
   desc: string,
   stability: string,
   since: string,
+  state: string,
   group: string,
   method: string,
   path: string,
   bodyType: string,
+  bodyDesc: string,
   sort: number
 }
 
-declare type Group = {
+declare interface Group {
   id: string,
   library: string,
   version: string,
@@ -72,11 +82,11 @@ declare type Group = {
   sort: number
 }
 
-declare type MapGroup = Group & {
+declare interface MapGroup extends Group {
   route: Array<Route>
 }
 
-declare type Response = {
+declare interface Response {
   id: string,
   library: string,
   version: string,
@@ -86,7 +96,7 @@ declare type Response = {
   type: {} | void
 }
 
-declare type Description = {
+declare interface Description {
   id: string,
   library: string,
   version: string,
@@ -95,16 +105,17 @@ declare type Description = {
   sort: number
 }
 
-declare type Code = {
+declare interface Code {
   id: string,
   library: string,
   version: string,
   desc: number,
-  code: string
+  code: string,
+  createdAt: Date
 }
 
 //根据Field的type类型获取的简单模型
-declare type SimpleModel = {
+declare interface SimpleModel {
   modelType: string, //模型的类型
   modelTitle: string, //模型的title
   fieldType: string, //字段的类型
@@ -112,8 +123,8 @@ declare type SimpleModel = {
 }
 
 //对Field的层级关系处理
-declare type ModelField = Field & SimpleModel & {
-  children:Object|Tuple|Scope & {fields: Array<ModelField>}
+declare interface ModelField extends Field, SimpleModel {
+  children:ObjectModel|Tuple|Scope & {fields: Array<ModelField>}
 }
 
 declare module 'restdoc' {
