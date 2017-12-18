@@ -134,7 +134,7 @@ declare module 'restdoc' {
     children:ObjectModel|Tuple|Scope & { fields: Array<ModelField> }
   }
   //组件
-  declare export default class Index {
+  declare export default class Index extends React$Component<any, any> {
     groups: Array<Group>,
     routes: Array<Route>,
     descriptions: Array<Description>,
