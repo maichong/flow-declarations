@@ -148,6 +148,6 @@ declare module 'restdoc' {
     className?: string,
     isDownload?: boolean,
     callBackComponentUpdate?: Function|null, //报告父级组件已更新，等待父级判断是否还需要更新
-    shouldComponentUpdate?: boolean //是否需要更新组件 shouldComponentUpdate
+    isShouldComponentUpdate?: boolean //是否需要更新组件 shouldComponentUpdate
   }
 }
