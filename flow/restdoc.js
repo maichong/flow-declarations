@@ -6,7 +6,7 @@
  */
 
 declare module 'restdoc' {
-  declare interface ObjectModel {
+  declare export interface ObjectModel {
     id: string,
     project: string,
     library: string,
@@ -17,7 +17,7 @@ declare module 'restdoc' {
     createdAt: Date
   }
 
-  declare interface Field {
+  declare export interface Field {
     id: string,
     project: string,
     library: string,
@@ -34,7 +34,7 @@ declare module 'restdoc' {
     options: Object
   }
 
-  declare interface Tuple {
+  declare export interface Tuple {
     id: string,
     project: string,
     library: string,
@@ -45,19 +45,19 @@ declare module 'restdoc' {
     createdAt: Date
   }
 
-  declare interface Scope {
+  declare export interface Scope {
     id: string,
     project: string,
     library: string,
     version: string,
     object: string,
     title: string,
-    fields: ApiField[],
+    fields: Array<string|Object>,
     share: boolean,
     createdAt: Date
   }
 
-  declare interface Route {
+  declare export interface Route {
     id: string,
     library: string,
     version: string,
@@ -74,7 +74,7 @@ declare module 'restdoc' {
     sort: number
   }
 
-  declare interface Group {
+  declare export interface Group {
     id: string,
     library: string,
     version: string,
@@ -83,11 +83,13 @@ declare module 'restdoc' {
     sort: number
   }
 
-  declare interface MapGroup extends Group {
-    route: Array<Route>
-  }
+  // declare export interface MapGroup {
+  //   +[id:string]: Group & {
+  //     route: Array<Route>
+  //   }
+  // }
 
-  declare interface Response {
+  declare export interface Response {
     id: string,
     library: string,
     version: string,
@@ -97,16 +99,16 @@ declare module 'restdoc' {
     type: {} | void
   }
 
-  declare interface Description {
+  declare export interface Description {
     id: string,
     library: string,
     version: string,
     title: string,
-    desc: number,
+    desc: string,
     sort: number
   }
 
-  declare interface Code {
+  declare export interface Code {
     id: string,
     library: string,
     version: string,
@@ -116,7 +118,7 @@ declare module 'restdoc' {
   }
 
   //根据Field的type类型获取的简单模型
-  declare interface SimpleModel {
+  declare export interface SimpleModelByFieldType {
     modelType: string, //模型的类型
     modelTitle: string, //模型的title
     fieldType: string, //字段的类型
@@ -124,10 +126,15 @@ declare module 'restdoc' {
   }
 
   //对Field的层级关系处理
-  declare interface ModelField extends Field, SimpleModel {
+  declare export interface ModelField extends Field {
+    modelType: string, //模型的类型
+    modelTitle: string, //模型的title
+    fieldType: string, //字段的类型
+    hasFields: boolean, //是否有字段数组
     children:ObjectModel|Tuple|Scope & { fields: Array<ModelField> }
   }
-  declare class ApiInfo {
+  //组件
+  declare export default class Index {
     groups: Array<Group>,
     routes: Array<Route>,
     descriptions: Array<Description>,
@@ -143,5 +150,4 @@ declare module 'restdoc' {
     callBackComponentUpdate?: Function|null, //报告父级组件已更新，等待父级判断是否还需要更新
     shouldComponentUpdate?: boolean //是否需要更新组件 shouldComponentUpdate
   }
-  declare var exports: Class<ApiInfo>;
 }
