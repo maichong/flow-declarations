@@ -205,8 +205,8 @@ declare type Alaska$sledQueueItem = {
   notify: boolean;
   params: Object;
   sledName: string;
-  result: void | any;
-  error: void | string;
+  result: ?any;
+  error: ?string;
   timeout: number;
   createdAt: Date;
   expiredAt: Date;
@@ -299,6 +299,7 @@ declare interface Alaska$FieldGroup {
   form?: boolean,
   style?: Alaska$style,
   wrapper?: string, // 自定义Wrapper占位符
+  ability?: string,
   super?: DependsQueryExpression,
   hidden?: DependsQueryExpression,
   depends?: DependsQueryExpression,
@@ -425,6 +426,7 @@ declare class Alaska$Model extends events$EventEmitter {
   static MongooseModel: Alaska$Model;
   static schema: Mongoose$Schema<*>;
   static prefix: string;
+  static preview: ?string;
   static autoSelect: boolean;
   static defaultScope: { [field: string]: boolean };
   static defaultSort?: string;
@@ -584,15 +586,15 @@ declare class Alaska$Field {
 [path: string]: any;
 
   // Mongoose
-  get: void | Function;
-  set: void | Function;
-  default: void | any;
-  index: void | boolean;
-  unique: void | boolean;
-  sparse: void | boolean;
-  text: void | boolean;
-  required: void | boolean;
-  select: void | boolean;
+  get: ?Function;
+  set: ?Function;
+  default: ?any;
+  index: ?boolean;
+  unique: ?boolean;
+  sparse: ?boolean;
+  text: ?boolean;
+  required: ?boolean;
+  select: ?boolean;
 
   // Alaska
   type: Class<Alaska$Field>;
@@ -601,20 +603,21 @@ declare class Alaska$Field {
   label: string;
   path: string;
   ref?: Class<Alaska$Model>;
-  group: void | string;
+  group: ?string;
   multi: boolean;
-  horizontal: void | boolean;
-  nolabel: void | boolean;
-  super: void | DependsQueryExpression;
-  hidden: void | DependsQueryExpression;
-  depends: void | DependsQueryExpression;
-  disabled: void | DependsQueryExpression;
-  fixed: void | boolean;
-  help: void | string;
-  cell: void | string | boolean;
-  view: void | string;
-  filter: void | string | boolean;
-  after: void | string;
+  horizontal: ?boolean;
+  nolabel: ?boolean;
+  ability: ?string;
+  super: ?DependsQueryExpression;
+  hidden: ?DependsQueryExpression;
+  depends: ?DependsQueryExpression;
+  disabled: ?DependsQueryExpression;
+  fixed: ?boolean;
+  help: ?string;
+  cell: ?string | boolean;
+  view: ?string;
+  filter: ?string | boolean;
+  after: ?string;
   private: boolean;
   _model: Class<Alaska$Model>;
   _schema: Mongoose$Schema<*>;
@@ -649,6 +652,7 @@ declare type Alaska$Field$options = {
   multi?: boolean;
   horizontal?: boolean;
   nolabel?: boolean;
+  ability?: string;
   super?: DependsQueryExpression;
   hidden?: DependsQueryExpression;
   depends?: DependsQueryExpression;

@@ -14,7 +14,7 @@ declare type Alaska$view$Field$Filter$Props = {
   +onClose: Function,
 }
 
-declare type  Alaska$view$Field$View$Props = {
+declare type Alaska$view$Field$View$Props = {
   +className: string,
   +model: Alaska$view$Model,
   +field: Alaska$view$Field,
@@ -23,6 +23,13 @@ declare type  Alaska$view$Field$View$Props = {
   +disabled: boolean,
   +value: any,
   +onChange: Function,
+}
+
+declare type Alaska$view$Preview$Props = {
+  +model: Alaska$view$Model,
+  +columnList: Alaska$view$Field[],
+  +record: Alaska$view$Record,
+  +selected: boolean
 }
 
 declare type Alaska$view$Login = {
@@ -49,6 +56,7 @@ declare type Alaska$view$Field = {
   +plain: string,
   +default?: any,
   +group?: string,
+  +ability?: string,
   +super?: DependsQueryExpression,
   +hidden?: DependsQueryExpression,
   +depends?: DependsQueryExpression,
@@ -99,6 +107,7 @@ declare type Alaska$view$Model = {
   +key: string, // alaska-user.user
   +label: string,
   +serviceId: string,
+  +preview?: string,
   +titleField: string,
   +defaultSort: string,
   +defaultColumns: string[],
@@ -253,37 +262,46 @@ declare module 'alaska-admin-view' {
   declare export var App: Class<React$Component<Object, Object>>;
 }
 declare module 'alaska-admin-view/redux/details' {
-  declare module.exports: any;
+  declare module .exports: any
+;
 }
 
 declare module 'alaska-admin-view/redux/lists' {
-  declare module.exports: any;
+  declare module .exports: any
+;
 }
 
 declare module 'alaska-admin-view/redux/layout' {
-  declare module.exports: any;
+  declare module .exports: any
+;
 }
 
 declare module 'alaska-admin-view/redux/login' {
-  declare module.exports: any;
+  declare module .exports: any
+;
 }
 
 declare module 'alaska-admin-view/redux/save' {
-  declare module.exports: any;
+  declare module .exports: any
+;
 }
 
 declare module 'alaska-admin-view/redux/settings' {
-  declare module.exports: any;
+  declare module .exports: any
+;
 }
 
 declare module 'alaska-admin-view/redux/startup' {
-  declare module.exports: any;
+  declare module .exports: any
+;
 }
 
 declare module 'alaska-admin-view/redux/user' {
-  declare module.exports: any;
+  declare module .exports: any
+;
 }
 
 declare module 'alaska-admin-view/views/FilterEditor' {
-  declare module.exports: Class<React$Component<Object, Object>>;
+  declare module .exports: Class<React$Component<Object, Object>>
+;
 }
