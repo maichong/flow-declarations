@@ -6,5 +6,5 @@ declare module 'intl-messageformat' {
     format(values: Object): string;
   }
 
-  declare var exports: Class<IntlMessageFormat>;
+  declare module.exports: Class<IntlMessageFormat>;
 }

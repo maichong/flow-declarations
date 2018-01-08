@@ -13,13 +13,11 @@ declare type Alaska$SelectField$Props = {
 };
 
 declare module 'alaska-field-select' {
-  declare class SelectField extends Alaska$Field {
-    number?: boolean;
-    boolean: boolean;
-    options: Alaska$SelectField$option[]
+  declare export default class SelectField extends Alaska$Field {
+  number?: boolean;
+  boolean: boolean;
+  options: Alaska$SelectField$option[]
   }
-
-  declare var exports: Class<SelectField>;
 }
 
 declare module 'alaska-field-select/views/Select' {

@@ -11,7 +11,7 @@ declare module esprima {
     loc?: any
   }>;
 
-  declare var exports: {
+  declare module.exports: {
     parse:parse;
     tokenize:tokenize;
   }

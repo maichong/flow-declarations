@@ -1,3 +1,5 @@
+import type { DependsQueryExpression } from 'check-depends';
+
 declare type Alaska$view$Field$Cell$Props = {
   +model: Alaska$view$Model,
   +field: Alaska$view$Field,
@@ -47,10 +49,10 @@ declare type Alaska$view$Field = {
   +plain: string,
   +default?: any,
   +group?: string,
-  +hidden?: boolean,
-  +super?: boolean,
-  +depends?: Alaska$Field$depends,
-  +disabled?: boolean | Alaska$Field$depends | string,
+  +super?: DependsQueryExpression,
+  +hidden?: DependsQueryExpression,
+  +depends?: DependsQueryExpression,
+  +disabled?: DependsQueryExpression,
   +help?: string,
 
   // layout
@@ -106,6 +108,9 @@ declare type Alaska$view$Model = {
   },
   +relationships: Alaska$Model$relationships,
   +actions: Alaska$Model$actions,
+  +nocreate?: boolean,
+  +noupdate?: boolean,
+  +noremove?: boolean,
   +fields: {
     [path: string]: Alaska$view$Field
   },
@@ -248,37 +253,37 @@ declare module 'alaska-admin-view' {
   declare export var App: Class<React$Component<Object, Object>>;
 }
 declare module 'alaska-admin-view/redux/details' {
-  declare var exports: any;
+  declare module.exports: any;
 }
 
 declare module 'alaska-admin-view/redux/lists' {
-  declare var exports: any;
+  declare module.exports: any;
 }
 
 declare module 'alaska-admin-view/redux/layout' {
-  declare var exports: any;
+  declare module.exports: any;
 }
 
 declare module 'alaska-admin-view/redux/login' {
-  declare var exports: any;
+  declare module.exports: any;
 }
 
 declare module 'alaska-admin-view/redux/save' {
-  declare var exports: any;
+  declare module.exports: any;
 }
 
 declare module 'alaska-admin-view/redux/settings' {
-  declare var exports: any;
+  declare module.exports: any;
 }
 
 declare module 'alaska-admin-view/redux/startup' {
-  declare var exports: any;
+  declare module.exports: any;
 }
 
 declare module 'alaska-admin-view/redux/user' {
-  declare var exports: any;
+  declare module.exports: any;
 }
 
 declare module 'alaska-admin-view/views/FilterEditor' {
-  declare var exports: Class<React$Component<Object, Object>>;
+  declare module.exports: Class<React$Component<Object, Object>>;
 }

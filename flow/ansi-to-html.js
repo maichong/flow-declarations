@@ -5,5 +5,5 @@ declare module 'ansi-to-html' {
     toHtml(input: string): string
   }
 
-  declare var exports: Class<ANSI>;
+  declare module.exports: Class<ANSI>;
 }

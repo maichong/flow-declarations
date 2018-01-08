@@ -40,25 +40,31 @@ declare module 'alaska-user/models/Role' {
 }
 
 declare module 'alaska-user/sleds/Init' {
-  declare var exports: Class<Alaska$Sled>
+  declare export default class Init extends Alaska$Sled {
+  }
 }
 
 declare module 'alaska-user/sleds/Login' {
-  declare var exports: Class<Alaska$Sled>
+  declare export default class Login extends Alaska$Sled {
+  }
 }
 
 declare module 'alaska-user/sleds/Logout' {
-  declare var exports: Class<Alaska$Sled>
+  declare export default class Logout extends Alaska$Sled {
+  }
 }
 
 declare module 'alaska-user/sleds/Register' {
-  declare var exports: Class<Alaska$Sled>
+  declare export default class Register extends Alaska$Sled {
+  }
 }
 
 declare module 'alaska-user/sleds/RegisterAbility' {
-  declare var exports: Class<Alaska$Sled>
+  declare export default class RegisterAbility extends Alaska$Sled {
+  }
 }
 
 declare module 'alaska-user/sleds/RegisterRole' {
-  declare var exports: Class<Alaska$Sled>
+  declare export default class RegisterRole extends Alaska$Sled {
+  }
 }

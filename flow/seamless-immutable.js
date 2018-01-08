@@ -43,7 +43,7 @@ declare module 'seamless-immutable' {
   declare type ImmutableObject<T> = T & ImmutableObjectMixin<T>;
   declare type ImmutableArray<T> = T[] & ImmutableArrayMixin<T>;
 
-  declare var exports: {
+  declare module.exports: {
     <T>(data: T): ImmutableObject<T>;
     <T>(data: T[]): ImmutableArray<T>;
     from<T>(value: T): ImmutableObject<T>,

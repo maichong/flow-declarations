@@ -1,3 +1,3 @@
 declare module slash {
-  declare var exports: (input: string)=>string;
+  declare module.exports: (input: string)=>string;
 }

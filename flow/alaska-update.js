@@ -3,5 +3,5 @@ declare module 'alaska-update' {
     postInit(): void;
   }
 
-  declare var exports: UpdateService;
+  declare export default UpdateService;
 }

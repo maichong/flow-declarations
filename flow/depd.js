@@ -1,5 +1,5 @@
 declare module 'depd' {
   declare function deprecate(message: string): void;
 
-  declare var exports: (namespace: string) => deprecate;
+  declare module.exports: (namespace: string) => deprecate;
 }

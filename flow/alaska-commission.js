@@ -4,7 +4,7 @@ declare module 'alaska-commission' {
     postLoadConfig(): void;
   }
 
-  declare var exports: CommissionService;
+  declare module.exports: CommissionService;
 }
 
 declare module 'alaska-commission/models/Commission' {

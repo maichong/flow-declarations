@@ -3,6 +3,7 @@ import type Debugger from 'debug';
 import type Router from 'koa-router';
 import type Koa, { Context } from 'koa';
 import type User from 'alaska-user/models/User';
+import type { DependsQueryExpression } from 'check-depends';
 
 /// Mongoose
 
@@ -275,27 +276,34 @@ declare type Alaska$Model$action = {
   style?: string,
   sled?: string,
   view?: string,
-  super?: boolean,
   editor?: boolean,
   list?: boolean,
   needRecords?: number,
-  disabled?: Alaska$Field$depends,
-  depends?: Alaska$Field$depends,
+  super?: DependsQueryExpression,
+  hidden?: DependsQueryExpression,
+  depends?: DependsQueryExpression,
+  disabled?: DependsQueryExpression,
   confirm?: string,
-  pre?: Alaska$Field$depends,
+  pre?: string,
   script?: string,
-  post?: Alaska$Field$depends
+  post?: string
 };
 
 declare type Alaska$Model$actions = {
-  [key: string]: false | Alaska$Model$action
+  [key: string]: Alaska$Model$action
 };
 
-declare type Alaska$FieldGroup = {
+declare interface Alaska$FieldGroup {
   title: string,
   panel?: boolean,
+  form?: boolean,
   style?: Alaska$style,
-};
+  wrapper?: string, // 自定义Wrapper占位符
+  super?: DependsQueryExpression,
+  hidden?: DependsQueryExpression,
+  depends?: DependsQueryExpression,
+  disabled?: DependsQueryExpression,
+}
 
 declare class Alaska$Model extends events$EventEmitter {
 
@@ -425,7 +433,7 @@ declare class Alaska$Model extends events$EventEmitter {
   static userField: string;
   static searchFields: string[] | string;
   static defaultColumns: string[] | string;
-  static defaultFilters?: Object | (ctx: Alaska$Context) => Alaska$filters;
+  static defaultFilters?: Alaska$filters | (ctx: Alaska$Context) => Alaska$filters | Promise<Alaska$filters>;
   static scopes: {
     [scope: string]: string | { [field: string]: boolean }
   };
@@ -457,7 +465,7 @@ declare class Alaska$Model extends events$EventEmitter {
   static register(): Promise<void>;
   static underscoreMethod(field: string, name: string, fn: Function): void;
   static createFilters(search: string, filters?: Object | string): Alaska$filters;
-  static createFiltersByContext(ctx: Alaska$Context, state?: Object): Alaska$filters;
+  static createFiltersByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$filters>;
   static paginate(conditions?: Object): Alaska$PaginateQuery<this>;
   static paginateByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$PaginateResult>;
   static listByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$Model[]>;
@@ -595,17 +603,17 @@ declare class Alaska$Field {
   ref?: Class<Alaska$Model>;
   group: void | string;
   multi: boolean;
-  hidden: void | boolean;
-  fixed: void | boolean;
   horizontal: void | boolean;
   nolabel: void | boolean;
-  disabled: void | boolean | Alaska$Field$depends;
-  super: void | boolean;
+  super: void | DependsQueryExpression;
+  hidden: void | DependsQueryExpression;
+  depends: void | DependsQueryExpression;
+  disabled: void | DependsQueryExpression;
+  fixed: void | boolean;
   help: void | string;
   cell: void | string | boolean;
   view: void | string;
   filter: void | string | boolean;
-  depends: void | Alaska$Field$depends;
   after: void | string;
   private: boolean;
   _model: Class<Alaska$Model>;
@@ -639,29 +647,25 @@ declare type Alaska$Field$options = {
   path?: string;
   group?: string;
   multi?: boolean;
-  hidden?: boolean;
-  fixed?: boolean;
   horizontal?: boolean;
   nolabel?: boolean;
-  disabled?: boolean | Alaska$Field$depends | string;
-  super?: boolean;
+  super?: DependsQueryExpression;
+  hidden?: DependsQueryExpression;
+  depends?: DependsQueryExpression;
+  disabled?: DependsQueryExpression;
+  fixed?: boolean;
   help?: string;
   cell?: string | boolean;
   view?: string;
   filter?: string | boolean;
-  depends?: Alaska$Field$depends;
   after?: string;
-};
-
-declare type Alaska$Field$depends = string | {
-  [path: string]: any
 };
 
 declare interface Alaska$SelectField$option {
   +value: string | number | boolean;
   +label: string;
   +style?: Alaska$style;
-  +depends?: Alaska$Field$depends;
+  +depends?: DependsQueryExpression;
 }
 
 declare interface Alaska$Currency {
@@ -846,7 +850,6 @@ declare module alaska {
   declare export var PUBLIC: 1;
   declare export var AUTHENTICATED: 2;
   declare export var OWNER: 3;
-  declare var exports: Alaska$Alaska;
   declare export default Alaska$Alaska;
 }
 

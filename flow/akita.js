@@ -85,9 +85,9 @@ type Akita$Client = {
 }
 
 declare module 'akita' {
-  declare var exports: Akita$Client;
+  declare module.exports: Akita$Client;
 }
 
 declare module 'akita-node' {
-  declare var exports: Akita$Client;
+  declare module.exports: Akita$Client;
 }

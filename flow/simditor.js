@@ -1,5 +1,5 @@
 // TODO
 
 declare module 'simditor' {
-  declare var exports: any;
+  declare module.exports: any;
 }

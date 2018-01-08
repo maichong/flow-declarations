@@ -8,5 +8,5 @@ declare module 'mockjs' {
     }
   }
 
-  declare var exports: Class<Default>;
+  declare module.exports: Class<Default>;
 }

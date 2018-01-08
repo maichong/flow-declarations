@@ -3,5 +3,5 @@ declare type Default = {
   Netmask: (net: string, mask?: number) => string
 }
 declare module 'netmask' {
-  declare var exports: Default;
+  declare module.exports: Default;
 }

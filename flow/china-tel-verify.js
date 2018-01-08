@@ -1,5 +1,5 @@
 declare module 'china-tel-verify' {
-  declare var exports: {
+  declare module.exports: {
     (tel: string): boolean;
     isCMCC: (tel: string) => boolean;
     isCTCC: (tel: string) => boolean;

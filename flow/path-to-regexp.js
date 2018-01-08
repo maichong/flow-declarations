@@ -1,5 +1,5 @@
 declare module 'path-to-regexp' {
-  declare var exports: {
+  declare module.exports: {
     (path: string | string[] | RegExp,
      keys?: Object[],
      options?: {

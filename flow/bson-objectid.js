@@ -1,5 +1,5 @@
 declare module 'bson-objectid' {
-  declare var exports: {
+  declare module.exports: {
     (id?: string | number | bson$ObjectId): bson$ObjectId;
     createFromHexString(hexString: string): bson$ObjectId;
     createFromTime(time: number): bson$ObjectId;

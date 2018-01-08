@@ -10,8 +10,6 @@ declare module 'debug' {
     namespace: string;
   };
 
-  declare function exports(namespace: string): Debugger;
-
   declare var names: Array<string>;
   declare var skips: Array<string>;
   declare var colors: Array<number>;
@@ -26,4 +24,6 @@ declare module 'debug' {
   declare var formatters: {
     [formatter: string]: () => {}
   };
+
+  declare module.exports: (namespace: string)=> Debugger;
 };

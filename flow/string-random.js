@@ -5,5 +5,5 @@ declare module 'string-random' {
     specials?: string | boolean;
   }): string;
 
-  declare var exports: random;
+  declare module.exports: random;
 }

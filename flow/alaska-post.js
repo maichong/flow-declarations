@@ -32,16 +32,14 @@ declare module 'alaska-post/models/Post' {
 }
 
 declare module 'alaska-post/models/PostCat' {
-  declare class PostCat extends Alaska$Model {
-    title: string;
-    parent: Object;
-    subCats: Object[];
-    sort: number;
-    createdAt: Date;
-    preSave(): void;
+  declare export default class PostCat extends Alaska$Model {
+  title: string;
+  parent: Object;
+  subCats: Object[];
+  sort: number;
+  createdAt: Date;
+  preSave(): void;
   }
-
-  declare export default PostCat;
 }
 
 declare module 'alaska-post/models/PostComment' {

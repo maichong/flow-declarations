@@ -1,7 +1,7 @@
 // TODO
 
 declare module escodegen {
-  declare var exports: {
+  declare module.exports: {
     generate:(AST: Object, options?: Object)=>string;
   }
 }

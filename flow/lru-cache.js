@@ -20,5 +20,5 @@ declare module 'lru-cache' {
     itemCount: number;
   }
 
-  declare var exports: Class<LRU>;
+  declare module.exports: Class<LRU>;
 }

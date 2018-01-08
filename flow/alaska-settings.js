@@ -7,7 +7,7 @@ declare module 'alaska-settings' {
     set(id: string | number, value: any): any;
   }
 
-  declare var exports: SettingsService;
+  declare export default SettingsService;
 }
 
 

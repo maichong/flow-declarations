@@ -1,5 +1,5 @@
 // TODO
 
 declare module co {
-  declare var exports: (fn: any) => Promise<any>;
+  declare module.exports: (fn: any) => Promise<any>;
 }

@@ -44,5 +44,5 @@ declare module 'update-notifier' {
     name: string;
   }
 
-  declare var exports: (settings?: Settings) => UpdateNotifier;
+  declare module.exports: (settings?: Settings) => UpdateNotifier;
 }

@@ -3,7 +3,7 @@ declare module 'mime-types' {
     [mimeType: string]: string[]
   }
 
-  declare var exports: {
+  declare module.exports: {
     define(map: MimeMap): void;
     load(file: string): void;
     lookup(path: string, fallback?: string): string;

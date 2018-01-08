@@ -77,5 +77,5 @@ declare module 'numeral' {
     validate(value: any, culture: any): boolean;
   }
 
-  declare var exports: Numeral;
+  declare module.exports: Numeral;
 }

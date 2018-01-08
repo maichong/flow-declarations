@@ -1,5 +1,5 @@
 // TODO
 
 declare module 'ali-oss' {
-  declare var exports: any;
+  declare module.exports: any;
 }
