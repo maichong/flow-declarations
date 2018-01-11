@@ -279,6 +279,7 @@ declare type Alaska$Model$action = {
   editor?: boolean,
   list?: boolean,
   needRecords?: number,
+  ability?: string,
   super?: DependsQueryExpression,
   hidden?: DependsQueryExpression,
   depends?: DependsQueryExpression,
@@ -406,6 +407,7 @@ declare class Alaska$Model extends events$EventEmitter {
   };
   static _virtuals: { [path: string]: boolean };
 
+  static schemaOptions: Object;
   static registered: boolean;
   static classOfModel: true;
   static modelName: string;

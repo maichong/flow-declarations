@@ -1,4 +1,5 @@
 import type { DependsQueryExpression } from 'check-depends';
+import type { ImmutableObject, ImmutableArray } from 'seamless-immutable';
 
 declare type Alaska$view$Field$Cell$Props = {
   +model: Alaska$view$Model,
@@ -151,7 +152,7 @@ declare type Alaska$view$RecordList = {
   +previous: number,
   +next: number,
   +error: string,
-  +results: Array<Alaska$view$Record>
+  +results: ImmutableArray<Alaska$view$Record>
 }
 
 declare type Alaska$view$Menu = {
@@ -201,21 +202,22 @@ declare type Alaska$view$lists = {
 }
 
 declare type Alaska$view$save = {
-  +error?: Error,
+  +error: null | { message: string, code?: string | number },
   +fetching: boolean,
   +key: string,
   +_r: number,
-  +res: Alaska$view$Record
+  +data?: ImmutableObject<Alaska$view$Record> | ImmutableArray<Alaska$view$Record>,
+  +res?: ImmutableObject<Alaska$view$Record> | ImmutableArray<Alaska$view$Record>
 }
 
 declare type Alaska$view$StoreState = {
   +layout: 'full' | 'icon',
-  +login: Alaska$view$Login,
-  +user: Alaska$view$User,
+  +login: ImmutableObject<Alaska$view$Login>,
+  +user: ImmutableObject<Alaska$view$User>,
   +settings: Alaska$view$Settings,
-  +lists: Alaska$view$lists,
-  +details: Alaska$view$details,
-  +save: Alaska$view$save
+  +lists: ImmutableObject<Alaska$view$lists>,
+  +details: ImmutableObject<Alaska$view$details>,
+  +save: ImmutableObject<Alaska$view$save>
 }
 
 declare type Alaska$view$Views = {
@@ -256,52 +258,98 @@ declare type Alaska$view$history = {
   block: (prompt: string) => void
 };
 
+declare interface Alaska$view$ReduxAction<T, P> {
+  type: T;
+  payload: P
+}
+
 declare module 'alaska-admin-view' {
   declare export var api: Akita$Client;
   declare export var store: Object;
   declare export var App: Class<React$Component<Object, Object>>;
 }
 declare module 'alaska-admin-view/redux/details' {
-  declare module .exports: any
-;
+  declare export var LOAD_DETAILS: 'LOAD_DETAILS';
+  declare export var APPLY_DETAILS: 'APPLY_DETAILS';
+  declare export var BATCH_APPLY_DETAILS: 'BATCH_APPLY_DETAILS';
+  declare export var CLEAR_DETAILS: 'CLEAR_DETAILS';
+  declare export var BATCH_CLEAR_DETAILS: 'BATCH_CLEAR_DETAILS';
+
+  declare type clearDetailsPayload = { key: string, ids?: string[] };
+
+  declare export function clearDetails(item: clearDetailsPayload): Alaska$view$ReduxAction<'CLEAR_DETAILS', clearDetailsPayload>;
+
+  declare type batchClearDetailsPayload = clearDetailsPayload[];
+
+  declare export function batchClearDetails(list: batchClearDetailsPayload): Alaska$view$ReduxAction<'BATCH_CLEAR_DETAILS', batchClearDetailsPayload>;
+
+  declare type loadDetailsPayload = { service: string, model: string, key: string, id: string };
+
+  declare export function loadDetails(item: loadDetailsPayload): Alaska$view$ReduxAction<'LOAD_DETAILS', loadDetailsPayload>;
+
+  declare type applyDetailsPayload = { key: string, data: Object };
+
+  declare export function applyDetails(key: string, data: Object): Alaska$view$ReduxAction<'APPLY_DETAILS', applyDetailsPayload>;
+
+  declare type batchApplyDetailsPayload = Array<applyDetailsPayload>;
+
+  declare export function batchApplyDetails(list: batchApplyDetailsPayload): Alaska$view$ReduxAction<'BATCH_APPLY_DETAILS', batchApplyDetailsPayload>;
+
 }
 
 declare module 'alaska-admin-view/redux/lists' {
-  declare module .exports: any
-;
+  declare export var CLEAR_LIST: 'CLEAR_LIST';
+  declare export var LOAD_LIST: 'LOAD_LIST';
+  declare export var APPLY_LIST: 'APPLY_LIST';
+
+  declare type clearListPayload = { key?: string };
+
+  declare export function clearList(key?: string): Alaska$view$ReduxAction<'CLEAR_LIST', clearListPayload>;
+
+  declare type loadListPayload = {
+    service: string,
+    model: string,
+    key: string,
+    page?: number,
+    filters?: Object,
+    search?: string,
+    sort?: string
+  };
+
+  declare export function loadList(options: loadListPayload): Alaska$view$ReduxAction<'LOAD_LIST', loadListPayload>;
+
+  declare type applyListPayload = Alaska$view$RecordList & { key: string };
+
+  declare export function applyList(key: string, res: Alaska$view$RecordList): Alaska$view$ReduxAction<'LOAD_LIST', applyListPayload>;
 }
 
 declare module 'alaska-admin-view/redux/layout' {
-  declare module .exports: any
-;
-}
+  declare export var APPLY_LAYOUT: 'APPLY_LAYOUT';
 
-declare module 'alaska-admin-view/redux/login' {
-  declare module .exports: any
-;
+  declare type LAYOUT = 'icon' | 'full' | 'hidden';
+
+  declare export function applyLayout(layout: LAYOUT): Alaska$view$ReduxAction<'APPLY_LAYOUT', LAYOUT>;
 }
 
 declare module 'alaska-admin-view/redux/save' {
-  declare module .exports: any
-;
-}
+  declare export var SAVE: 'SAVE';
 
-declare module 'alaska-admin-view/redux/settings' {
-  declare module .exports: any
-;
-}
+  declare type saveOptions = {
+    service: string,
+    model: string,
+    key: string,
+    sort?: string,
+    _r: any
+  };
 
-declare module 'alaska-admin-view/redux/startup' {
-  declare module .exports: any
-;
-}
+  declare type savePayload = saveOptions & {
+    data: Object | Object[]
+  }
 
-declare module 'alaska-admin-view/redux/user' {
-  declare module .exports: any
-;
+  declare export function save(options: saveOptions, data: Object | Object[]): Alaska$view$ReduxAction<'SAVE', savePayload>;
 }
 
 declare module 'alaska-admin-view/views/FilterEditor' {
-  declare module .exports: Class<React$Component<Object, Object>>
-;
+  declare export default class FilterEditor extends React$Component<Object> {
+  }
 }
