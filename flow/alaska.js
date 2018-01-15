@@ -106,10 +106,10 @@ declare type Alaska$Config$cache = {
   maxAge?: number;
 };
 
-declare type Alaska$Config$renderer = {
+declare interface Alaska$Config$renderer {
   type: string;
   cache: boolean;
-};
+}
 
 declare type Alaska$Config$session = {
   cookie?: {
@@ -279,7 +279,7 @@ declare type Alaska$Model$action = {
   editor?: boolean,
   list?: boolean,
   needRecords?: number,
-  ability?: string,
+  ability?: string | (data: Object) => string,
   super?: DependsQueryExpression,
   hidden?: DependsQueryExpression,
   depends?: DependsQueryExpression,
@@ -295,12 +295,12 @@ declare type Alaska$Model$actions = {
 };
 
 declare interface Alaska$FieldGroup {
-  title: string,
+  title?: string,
   panel?: boolean,
   form?: boolean,
   style?: Alaska$style,
   wrapper?: string, // 自定义Wrapper占位符
-  ability?: string,
+  ability?: string | (data: Object) => string,
   super?: DependsQueryExpression,
   hidden?: DependsQueryExpression,
   depends?: DependsQueryExpression,
@@ -416,6 +416,7 @@ declare class Alaska$Model extends events$EventEmitter {
   static path: string;
   static label: string;
   static icon: string;
+  static hidden: boolean;
   static nocreate: boolean;
   static noupdate: boolean;
   static noremove: boolean;
@@ -429,6 +430,7 @@ declare class Alaska$Model extends events$EventEmitter {
   static schema: Mongoose$Schema<*>;
   static prefix: string;
   static preview: ?string;
+  static quickEditorView: ?boolean;
   static autoSelect: boolean;
   static defaultScope: { [field: string]: boolean };
   static defaultSort?: string;
@@ -597,6 +599,7 @@ declare class Alaska$Field {
   text: ?boolean;
   required: ?boolean;
   select: ?boolean;
+  match?: RegExp;
 
   // Alaska
   type: Class<Alaska$Field>;
@@ -609,7 +612,7 @@ declare class Alaska$Field {
   multi: boolean;
   horizontal: ?boolean;
   nolabel: ?boolean;
-  ability: ?string;
+  ability: ?string | (data: Object) => string;
   super: ?DependsQueryExpression;
   hidden: ?DependsQueryExpression;
   depends: ?DependsQueryExpression;
@@ -642,6 +645,7 @@ declare type Alaska$Field$options = {
   text?: boolean;
   required?: boolean;
   select?: boolean;
+  match?: boolean;
 
   // Alaska
   options?: Alaska$SelectField$option[] | Promise<Alaska$SelectField$option[]> | Promise<Alaska$Currency[]>;
@@ -654,7 +658,7 @@ declare type Alaska$Field$options = {
   multi?: boolean;
   horizontal?: boolean;
   nolabel?: boolean;
-  ability?: string;
+  ability?: string | (data: Object) => string;
   super?: DependsQueryExpression;
   hidden?: DependsQueryExpression;
   depends?: DependsQueryExpression;
@@ -695,6 +699,7 @@ declare class Alaska$Service {
   cache: Alaska$CacheDriver;
   renderer: Alaska$Renderer;
   db: Mongoose$Connection;
+  plugins: { [key: string]: Alaska$Plugin };
   sleds: { [name: string]: Class<Alaska$Sled> };
   models: { [name: string]: Class<Alaska$Model> };
   locales: { [locale: string]: Object };
