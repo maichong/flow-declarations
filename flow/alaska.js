@@ -139,7 +139,6 @@ declare type Alaska$Config$services = {
   }
 };
 
-
 declare type Alaska$Config = {
   [name: string]: any;
 
@@ -315,7 +314,7 @@ declare class Alaska$Model extends events$EventEmitter {
   schema: Mongoose$Schema<*>;
   isNew: boolean;
   id: string;
-  _id: string | number | Object | any;
+  _id: any;
   errors: Object[];
 
   constructor(obj?: Object, fields?: Object, skipId?: boolean): void;
@@ -420,6 +419,7 @@ declare class Alaska$Model extends events$EventEmitter {
   static nocreate: boolean;
   static noupdate: boolean;
   static noremove: boolean;
+  static noexport: boolean;
   static collection?: string;
   static groups: {
     [key: string]: Alaska$FieldGroup
@@ -475,7 +475,7 @@ declare class Alaska$Model extends events$EventEmitter {
   static paginate(conditions?: Object): Alaska$PaginateQuery<this>;
   static paginateByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$PaginateResult>;
   static listByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$Model[]>;
-  static showByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$Model>;
+  static showByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$Model | null>;
   static fromObject(data: Object): Alaska$Model;
   static fromObjectArray(array: Object[]): Alaska$Model[];
   static toObjectArray(array: Alaska$Model[]): Object[];
@@ -613,6 +613,7 @@ declare class Alaska$Field {
   horizontal: ?boolean;
   nolabel: ?boolean;
   ability: ?string | (data: Object) => string;
+  private: boolean;
   super: ?DependsQueryExpression;
   hidden: ?DependsQueryExpression;
   depends: ?DependsQueryExpression;
@@ -623,7 +624,6 @@ declare class Alaska$Field {
   view: ?string;
   filter: ?string | boolean;
   after: ?string;
-  private: boolean;
   _model: Class<Alaska$Model>;
   _schema: Mongoose$Schema<*>;
   _options: Alaska$Field$options;
@@ -659,6 +659,7 @@ declare type Alaska$Field$options = {
   horizontal?: boolean;
   nolabel?: boolean;
   ability?: string | (data: Object) => string;
+  private?: boolean;
   super?: DependsQueryExpression;
   hidden?: DependsQueryExpression;
   depends?: DependsQueryExpression;
@@ -744,6 +745,11 @@ declare class Alaska$Alaska {
   try: <T>(promise: Promise<T>) => Promise<T>;
 }
 
+declare interface Alaska$Driver$config {
+  type: string | Alaska$Driver;
+  idle?: boolean;
+}
+
 declare class Alaska$Driver {
   static classOfDriver: true;
   instanceOfDriver: boolean;
@@ -752,7 +758,7 @@ declare class Alaska$Driver {
   idle: number;
   idleId: string;
 
-  constructor(service: Alaska$Service, options: Object): void;
+  constructor(service: Alaska$Service, options: Alaska$Driver$config): void;
   driver(): any;
   free(): void;
   destroy(): void;
@@ -764,7 +770,7 @@ declare class Alaska$CacheDriver extends Alaska$Driver {
   static classOfCacheDriver: true;
   instanceOfCacheDriver: true;
 
-  constructor(service: Alaska$Service, options: Object): void;
+  constructor(service: Alaska$Service, options: Alaska$Driver$config): void;
   get(key: string): Promise<any>;
   set(key: string, value: any, lifetime?: number): Promise<void>;
   del(key: string): Promise<void>;
@@ -781,7 +787,7 @@ declare class Alaska$QueueDriver extends Alaska$Driver {
   instanceOfQueueDriver: true;
   key: string;
 
-  constructor(service: Alaska$Service, options: Object): void;
+  constructor(service: Alaska$Service, options: Alaska$Driver$config): void;
   push(item: any): Promise<void>;
   pop(timeout?: number): Promise<any>;
 }
@@ -791,7 +797,7 @@ declare class Alaska$SubscribeDriver extends Alaska$Driver {
   instanceOfSubscribeDriver: true;
   channel: string;
 
-  constructor(service: Alaska$Service, options: Object): void;
+  constructor(service: Alaska$Service, options: Alaska$Driver$config): void;
   publish(message: Object): Promise<void>;
   subscribe(): Promise<Object>;
   read(timeout: ?number): Promise<Object | null>;
@@ -819,7 +825,7 @@ declare class Alaska$EmailDriver extends Alaska$Driver {
   static classOfEmailDriver: true;
   instanceOfEmailDriver: true;
 
-  constructor(service: Alaska$Service, options: Object): void;
+  constructor(service: Alaska$Service, options: Alaska$Driver$config): void;
   send(data: Alaska$emailMessage): Promise<Object>;
 }
 
@@ -827,7 +833,7 @@ declare class Alaska$SmsDriver extends Alaska$Driver {
   static classOfSmsDriver: true;
   instanceOfSmsDriver: true;
 
-  constructor(service: Alaska$Service, options: Object): void;
+  constructor(service: Alaska$Service, options: Alaska$Driver$config): void;
   send(to: string, message: string): Promise<Object>;
 }
 

@@ -121,12 +121,18 @@ declare type Alaska$view$Model = {
   +nocreate?: boolean,
   +noupdate?: boolean,
   +noremove?: boolean,
+  +noexport?: boolean,
   +fields: {
     [path: string]: Alaska$view$Field
   },
   +abilities: {
     [ability: string]: true
-  }
+  },
+  canCreate: boolean,
+  canUpdate: boolean,
+  canRemove: boolean,
+  canUpdateRecord(record: Object): boolean,
+  canRemoveRecord(record: Object): boolean,
 }
 
 declare type Alaska$view$Service = {
@@ -145,13 +151,17 @@ declare type Alaska$view$Record = {
 
 declare type Alaska$view$RecordList = {
   +key: string,
-  +total: number,
+  +fetching: boolean,
+  +filters: ?Object,
+  +search: ?string,
+  +sort: ?string,
+  +total: ?number,
   +page: number,
-  +limit: number,
-  +totalPage: number,
-  +previous: number,
-  +next: number,
-  +error: string,
+  +limit: ?number,
+  +totalPage: ?number,
+  +previous: ?number,
+  +next: ?number,
+  +error: ?string,
   +results: ImmutableArray<Alaska$view$Record>
 }
 
@@ -167,6 +177,7 @@ declare type Alaska$view$Menu = {
 }
 
 declare type Alaska$view$Settings = {
+  +user: Alaska$view$User,
   +superMode: boolean,
   +abilities: {
     [ability: string]: true
@@ -349,7 +360,246 @@ declare module 'alaska-admin-view/redux/save' {
   declare export function save(options: saveOptions, data: Object | Object[]): Alaska$view$ReduxAction<'SAVE', savePayload>;
 }
 
+declare module 'alaska-admin-view/views/Action' {
+  declare export type Props = {
+    editor?: boolean,
+    model: Alaska$view$Model,
+    action: Alaska$Model$action,
+    records?: ImmutableArray<Alaska$view$Record>,
+    selected?: ImmutableArray<Alaska$view$Record>,
+    disabled?: boolean,
+    record?: ImmutableObject<Alaska$view$Record>,
+    onClick?: Function,
+    link?: string,
+    refresh?: Function,
+  };
+
+  declare export default class Action extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/ActionList' {
+  declare export type Props = {
+    editor?: boolean,
+    disabled?: boolean,
+    model: Alaska$view$Model,
+    record?: ImmutableObject<Alaska$view$Record>,
+    records?: ImmutableArray<Alaska$view$Record>,
+    selected?: ImmutableArray<Alaska$view$Record>,
+    refresh?: Function,
+    items: Array<{
+      key: string,
+      onClick?: Function,
+      link?: string,
+      action: Alaska$Model$action
+    }>,
+  };
+
+  declare export default class ActionList extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/ColumnTool' {
+  declare export type Props = {
+    model: Alaska$view$Model,
+    columns: string[],
+    onChange: Function,
+  };
+
+  declare export default class ColumnTool extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/FilterTool' {
+  declare export type Props = {
+    model: Alaska$view$Model,
+    filters: Object,
+    onChange: Function,
+  };
+
+  declare export default class FilterTool extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/Copyright' {
+  declare export type Props = {
+    layout: string
+  };
+
+  declare export default class Copyright extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/DataTable' {
+  declare export type Props = {
+    model: Alaska$view$Model,
+    columns?: string[],
+    selected?: ImmutableArray<Alaska$view$Record>,
+    records: ImmutableArray<Alaska$view$Record>,
+    activated?: ImmutableObject<Alaska$view$Record>,
+    sort?: string,
+    onSort?: Function,
+    onActive?: Function,
+    onSelect?: Function,
+    onRemove?: Function,
+    canDrag?: boolean
+  };
+
+  declare export default class DataTable extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/DataTableRow' {
+  declare export type Props = {
+    columnList: Alaska$view$Field[],
+    model: Alaska$view$Model,
+    record: Object,
+    active?: boolean,
+    selected?: boolean,
+    onEdit: Function,
+    onActive?: Function,
+    onSelect?: Function | null,
+    onRemove?: Function,
+  };
+
+  declare export default class DataTableRow extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/Editor' {
+  declare export type Props = {
+    model: Alaska$view$Model,
+    recordId: string,
+    record: ImmutableObject<Alaska$view$Record>,
+    disabled?: boolean,
+    onChange: Function
+  };
+
+  declare export default class Editor extends React$Component<Props> {
+  fieldRefs: Object;
+  checkErrors(): Object;
+  }
+}
+
+declare module 'alaska-admin-view/views/FieldGroup' {
+  declare export type Props = {
+    path: string,
+    model: Alaska$view$Model,
+    record: ImmutableObject<Alaska$view$Record>,
+    isNew: boolean,
+    fields: Alaska$view$Field[],
+    title?: string,
+    errors: {},
+    onFieldChange: Function,
+    disabled?: boolean,
+    form?: boolean,
+    panel?: boolean,
+    style?: Alaska$style,
+    wrapper?: string, // 自定义Wrapper占位符
+    horizontal?: boolean,
+    ability?: string | Function,
+    super?: DependsQueryExpression,
+    hidden?: DependsQueryExpression,
+    depends?: DependsQueryExpression,
+    disabled?: DependsQueryExpression,
+  };
+
+  declare export default class FieldGroup extends React$Component<Props> {
+  }
+}
+
 declare module 'alaska-admin-view/views/FilterEditor' {
-  declare export default class FilterEditor extends React$Component<Object> {
+  declare export type Props = {
+    value: Object,
+    model: Alaska$view$Model,
+    onChange: Function
+  };
+  declare export default class FilterEditor extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/List' {
+  declare export type Props = {
+    model: Alaska$view$Model,
+    search?: string,
+    filters?: Object,
+    sort?: string,
+    columns?: string[],
+    selected?: ImmutableArray<Alaska$view$Record>,
+    activated?: ImmutableObject<Alaska$view$Record>,
+    onSort?: Function,
+    onSelect?: Function,
+    onActive?: Function,
+    onRemove?: Function,
+  };
+  declare export default class List extends React$Component<Props> {
+  refresh(): void;
+  loadMore(): void;
+  }
+}
+
+declare module 'alaska-admin-view/views/Loading' {
+  declare export type Props = {
+    className?: string,
+    text?: string,
+  };
+  declare export default class Loading extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/Node' {
+  declare export type Props = {
+    children: React$Node,
+    tag?: string | Class<React$Component<any>> | false,
+    id?: string,
+    wrapper?: string,
+    props?: Object,
+    state?: Object,
+  };
+  declare export default class Node extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/QuickEditor' {
+  declare export type Props = {
+    model: Alaska$view$Model,
+    record?: ImmutableObject<Alaska$view$Record>,
+    records: ImmutableArray<Alaska$view$Record>,
+    onCancel: Function,
+    onRefresh: Function
+  };
+  declare export default class QuickEditor extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/Relationship' {
+  declare export type Props = {
+    title?: string,
+    service: string,
+    model: string,
+    path: string,
+    from: string,
+    filters?: Object,
+  };
+  declare export default class Relationship extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/TooltipWrapper' {
+  declare export type Props = {
+    children: React$Node,
+    tooltip: string,
+    placement?: string
+  };
+  declare export default class TooltipWrapper extends React$Component<Props> {
+  }
+}
+
+declare module 'alaska-admin-view/views/TopToolbar' {
+  declare export type Props = {
+    children: React$Node,
+    tools?: React$Node
+  };
+  declare export default class TopToolbar extends React$Component<Props> {
   }
 }

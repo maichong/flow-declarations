@@ -23,6 +23,7 @@ declare module 'alaska-user/models/User' {
 
 declare module 'alaska-user/models/Ability' {
   declare export default class Ability extends Alaska$Model {
+  _id: string;
   title: string;
   service: string;
   createdAt: Date;
@@ -31,6 +32,7 @@ declare module 'alaska-user/models/Ability' {
 
 declare module 'alaska-user/models/Role' {
   declare export default class Role extends Alaska$Model {
+  _id: string;
   title: string;
   abilities: Object[];
   sort: number;

@@ -1,6 +1,6 @@
 // for akita 0.3.7
 
-type Akita$PaginateResult = {
+type Akita$PaginateResult<T> = {
   total: number,
   page: number,
   limit: number,
@@ -8,20 +8,22 @@ type Akita$PaginateResult = {
   previous: number,
   next: number,
   search: string,
-  results: Object[]
+  results: T[]
+}
+
+declare class Akita$Model<+T> {
+  create(data: Object): Akita$Query<T>;
+  update(data?: Object): Akita$Query<T>;
+  update(id: string | number, data: Object): Akita$Query<T>;
+  remove(conditions?: Object | string | number): Akita$Query<void>;
+  count(conditions?: Object): Akita$Query<number>;
+  find(conditions?: Object): Akita$Query<Akita$PaginateResult<T>>;
+  findById(conditions: number | string): Akita$Query<T | null>;
+  findOne(conditions?: Object): Akita$Query<T | null>;
+  findAll(conditions?: Object): Akita$Query<T[]>;
 }
 
 declare class Akita$Query<+R> extends Promise<R> {
-  create(data: Object): Akita$Query<Object>;
-  update(data?: Object): Akita$Query<Object>;
-  update(id: string | number, data: Object): Akita$Query<Object>;
-  remove(conditions?: Object | string | number): Akita$Query<void>;
-  count(conditions?: Object): Akita$Query<number>;
-  find(conditions?: Object): Akita$Query<Akita$PaginateResult>;
-  findById(conditions: number | string): Akita$Query<Object | null>;
-  findOne(conditions?: Object): Akita$Query<Object | null>;
-  findAll(conditions?: Object): Akita$Query<Object[]>;
-
   param(key: Object): this;
   param(key: string, value: any): this;
 
@@ -40,7 +42,6 @@ declare class Akita$Query<+R> extends Promise<R> {
   // greater than
   gt(value: any): this;
   gte(value: any): this;
-
 
   limit(size: number): this;
   page(size: number): this;
@@ -81,13 +82,10 @@ type Akita$Client = {
   trace(path: string, init?: Akita$RequestInit): Akita$Result<null>;
   connect(path: string, init?: Akita$RequestInit): Akita$Result<null>;
 
-  (path: string): Akita$Query<any>;
+  (path: string): Akita$Model<*>;
 }
 
 declare module 'akita' {
-  declare module.exports: Akita$Client;
-}
-
-declare module 'akita-node' {
-  declare module.exports: Akita$Client;
+  declare module .exports: Akita$Client
+;
 }
