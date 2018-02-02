@@ -6,7 +6,7 @@ declare module 'alaska-user' {
 }
 
 declare module 'alaska-user/models/User' {
-  declare export default class User extends Alaska$Model {
+  declare export default class User extends Alaska$Model<User> {
   username: string;
   email: string;
   password: string;
@@ -22,7 +22,7 @@ declare module 'alaska-user/models/User' {
 }
 
 declare module 'alaska-user/models/Ability' {
-  declare export default class Ability extends Alaska$Model {
+  declare export default class Ability extends Alaska$Model<Ability> {
   _id: string;
   title: string;
   service: string;
@@ -31,7 +31,7 @@ declare module 'alaska-user/models/Ability' {
 }
 
 declare module 'alaska-user/models/Role' {
-  declare export default class Role extends Alaska$Model {
+  declare export default class Role extends Alaska$Model<Role> {
   _id: string;
   title: string;
   abilities: Object[];

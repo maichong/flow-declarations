@@ -15,7 +15,7 @@ declare module 'alaska-email' {
 
 
 declare module 'alaska-email/models/Email' {
-  declare export default class Email extends Alaska$Model {
+  declare export default class Email extends Alaska$Model<Email> {
   _id: string | number | Object | any;
   title: string;
   subject: string;
@@ -28,7 +28,7 @@ declare module 'alaska-email/models/Email' {
 }
 
 declare module 'alaska-email/models/EmailTask' {
-  declare export default class EmailTask extends Alaska$Model {
+  declare export default class EmailTask extends Alaska$Model<EmailTask> {
   title: string;
   email: Email;
   state: number;
@@ -39,5 +39,10 @@ declare module 'alaska-email/models/EmailTask' {
   lastUser: User;
   nextAt: Date;
   createdAt: Date;
+  }
+}
+
+declare module 'alaska-email/sleds/Send' {
+  declare export default class Balance extends Alaska$Sled {
   }
 }

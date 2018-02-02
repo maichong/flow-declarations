@@ -1,5 +1,5 @@
 declare module 'alaska-goods/models/Brand' {
-  declare export default class Brand extends Alaska$Model {
+  declare export default class Brand extends Alaska$Model<Brand> {
   title: string;
   brief: string;
   icon: Object;
@@ -14,7 +14,7 @@ declare module 'alaska-goods/models/Brand' {
 }
 
 declare module 'alaska-goods/models/Goods' {
-  declare export default class Goods extends Alaska$Model {
+  declare export default class Goods extends Alaska$Model<Goods> {
   _id: string | number | Object | any;
   title: string;
   brief: string;
@@ -48,7 +48,7 @@ declare module 'alaska-goods/models/Goods' {
 }
 
 declare module 'alaska-goods/models/GoodsCat' {
-  declare export default class GoodsCat extends Alaska$Model {
+  declare export default class GoodsCat extends Alaska$Model<GoodsCat> {
   _id: string | number | Object | any;
   title: string;
   icon: Object;
@@ -68,7 +68,7 @@ declare module 'alaska-goods/models/GoodsCat' {
 }
 
 declare module 'alaska-goods/models/GoodsProp' {
-  declare export default class GoodsProp extends Alaska$Model {
+  declare export default class GoodsProp extends Alaska$Model<GoodsProp> {
   _id: string | number | Object | any;
   title: string;
   cats: Object;
@@ -94,7 +94,7 @@ declare module 'alaska-goods/models/GoodsProp' {
 }
 
 declare module 'alaska-goods/models/GoodsPropValue' {
-  declare export default class GoodsPropValue extends Alaska$Model {
+  declare export default class GoodsPropValue extends Alaska$Model<GoodsPropValue> {
   _id: string | number | Object | any;
   title: string;
   prop: Object;
@@ -112,7 +112,7 @@ declare module 'alaska-goods/models/GoodsPropValue' {
 }
 
 declare module 'alaska-goods/models/Sku' {
-  declare export default class Sku extends Alaska$Model {
+  declare export default class Sku extends Alaska$Model<Sku> {
   pic: Object;
   goods: Object;
   key: string;
@@ -129,7 +129,7 @@ declare module 'alaska-goods/models/Sku' {
 }
 
 declare module 'alaska-goods/models/Special' {
-  declare export default class Special extends Alaska$Model {
+  declare export default class Special extends Alaska$Model<Special> {
   title: string;
   pic: Object;
   seoTitle: string;

@@ -14,7 +14,7 @@ declare module 'alaska-order' {
 
 
 declare module 'alaska-order/models/Order' {
-  declare export default class Order extends Alaska$Model {
+  declare export default class Order extends Alaska$Model<Order> {
   title: string;
   user: User;
   type: any;
@@ -49,7 +49,7 @@ declare module 'alaska-order/models/Order' {
 }
 
 declare module 'alaska-order/models/OrderItem' {
-  declare export default class OrderItem extends Alaska$Model {
+  declare export default class OrderItem extends Alaska$Model<OrderItem> {
   pic: Object;
   title: string;
   order: Order;
@@ -67,7 +67,7 @@ declare module 'alaska-order/models/OrderItem' {
 }
 
 declare module 'alaska-order/models/OrderLog' {
-  declare export default class OrderLog extends Alaska$Model {
+  declare export default class OrderLog extends Alaska$Model<OrderLog> {
   title: string;
   order: Order;
   state: number;

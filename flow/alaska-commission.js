@@ -8,7 +8,7 @@ declare module 'alaska-commission' {
 }
 
 declare module 'alaska-commission/models/Commission' {
-  declare export default class Commission extends Alaska$Model {
+  declare export default class Commission extends Alaska$Model<Commission> {
   title: string;
   user: Object;
   contributor: Object;

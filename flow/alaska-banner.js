@@ -7,7 +7,7 @@ declare module 'alaska-banner' {
   declare export default BannerService;
 }
 declare module 'alaska-banner/models/Banner' {
-  declare export default class Banner extends Alaska$Model {
+  declare export default class Banner extends Alaska$Model<Banner> {
   title: string;
   pic: Object;
   position: string;

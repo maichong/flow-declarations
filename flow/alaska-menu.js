@@ -5,7 +5,7 @@ declare module 'alaska-menu' {
   declare export default MenuService;
 }
 declare module 'alaska-menu/models/Menu' {
-  declare export default class Menu extends Alaska$Model {
+  declare export default class Menu extends Alaska$Model<Menu> {
   _id: String | number | Object | any;
   title: string;
   items: Object;

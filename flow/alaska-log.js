@@ -6,7 +6,7 @@ declare module 'alaska-log' {
 }
 
 declare module 'alaska-log/models/Log' {
-  declare export default class Log extends Alaska$Model {
+  declare export default class Log extends Alaska$Model<Log> {
   title: string;
   type: string;
   level: string;

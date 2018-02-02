@@ -10,7 +10,7 @@ declare module 'alaska-cart' {
 }
 
 declare module 'alaska-cart/models/CartItem' {
-  declare export default class CartItem extends Alaska$Model {
+  declare export default class CartItem extends Alaska$Model<CartItem> {
   pic: Object;
   title: string;
   goods: Goods;

@@ -12,7 +12,7 @@ declare module 'alaska-payment' {
 }
 
 declare module 'alaska-payment/models/Payment' {
-  declare export default class Payment extends Alaska$Model {
+  declare export default class Payment extends Alaska$Model<Payment> {
   title: string;
   user: User;
   amount: number;

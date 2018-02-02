@@ -12,7 +12,7 @@ declare module 'alaska-settings' {
 
 
 declare module 'alaska-settings/models/Settings' {
-  declare export default class Settings extends Alaska$Model {
+  declare export default class Settings extends Alaska$Model<Settings> {
   _id: string | number | Object | any;
   title: string;
   service: string;

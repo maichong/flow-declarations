@@ -7,7 +7,7 @@ declare module 'alaska-sms' {
   declare export default SmsService;
 }
 declare module 'alaska-sms/models/Sms' {
-  declare export default class Sms extends Alaska$Model {
+  declare export default class Sms extends Alaska$Model<Sms> {
   _id: string | Object | any;
   title: string;
   driver: Object;

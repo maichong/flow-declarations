@@ -9,7 +9,7 @@ declare module 'alaska-captcha' {
 }
 
 declare module 'alaska-captcha/models/Captcha' {
-  declare export default class Captcha extends Alaska$Model {
+  declare export default class Captcha extends Alaska$Model<Captcha> {
   _id: string | number | Object | any;
   title: string;
   type: string;

@@ -6,7 +6,7 @@ declare module 'alaska-link' {
   declare export default LinkService;
 }
 declare module 'alaska-link/models/Link' {
-  declare export default class Link extends Alaska$Model {
+  declare export default class Link extends Alaska$Model<Link> {
   title: string;
   url: string;
   pic: Object;

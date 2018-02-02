@@ -6,7 +6,7 @@ declare module 'alaska-admin' {
 }
 
 declare module 'alaska-admin/models/AdminMenu' {
-  declare export default class AdminMenu extends Alaska$Model {
+  declare export default class AdminMenu extends Alaska$Model<AdminMenu> {
   label: string;
   icon: string;
   type: string;

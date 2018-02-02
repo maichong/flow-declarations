@@ -8,7 +8,7 @@ declare module 'alaska-post' {
 }
 
 declare module 'alaska-post/models/Post' {
-  declare export default class Post extends Alaska$Model {
+  declare export default class Post extends Alaska$Model<Post> {
   title: string;
   user: User;
   cat: Object;
@@ -32,7 +32,7 @@ declare module 'alaska-post/models/Post' {
 }
 
 declare module 'alaska-post/models/PostCat' {
-  declare export default class PostCat extends Alaska$Model {
+  declare export default class PostCat extends Alaska$Model<PostCat> {
   title: string;
   parent: Object;
   subCats: Object[];
@@ -43,7 +43,7 @@ declare module 'alaska-post/models/PostCat' {
 }
 
 declare module 'alaska-post/models/PostComment' {
-  declare export default class PostComment extends Alaska$Model {
+  declare export default class PostComment extends Alaska$Model<PostComment> {
   post: Object;
   topic: Object;
   user: User;
@@ -57,7 +57,7 @@ declare module 'alaska-post/models/PostComment' {
 }
 
 declare module 'alaska-post/models/PostTag' {
-  declare export default class PostTag extends Alaska$Model {
+  declare export default class PostTag extends Alaska$Model<PostTag> {
   title: string;
   createdAt: Date;
   preSave(): void;
@@ -65,7 +65,7 @@ declare module 'alaska-post/models/PostTag' {
 }
 
 declare module 'alaska-post/models/PostTopic' {
-  declare export default class PostTopic extends Alaska$Model {
+  declare export default class PostTopic extends Alaska$Model<PostTopic> {
   title: string;
   pic: Object;
   summary: string;

@@ -5,7 +5,7 @@ declare module 'alaska-image' {
   declare export default ImageService;
 }
 declare module 'alaska-image/models/Image' {
-  declare export default class Image extends Alaska$Model {
+  declare export default class Image extends Alaska$Model<Image> {
   pic: Object;
   user: Object;
   createdAt: Date;

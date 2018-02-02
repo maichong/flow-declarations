@@ -8,7 +8,7 @@ declare module 'alaska-ticket' {
 }
 
 declare module 'alaska-ticket/models/Ticket' {
-  declare export default class Ticket extends Alaska$Model {
+  declare export default class Ticket extends Alaska$Model<Ticket> {
   user: ?User;
   title: string;
   userId: string;

@@ -5,7 +5,7 @@ declare module 'alaska-feedback' {
   declare export default FeedbackService;
 }
 declare module 'alaska-feedback/models/Feedback' {
-  declare export default class Feedback extends Alaska$Model {
+  declare export default class Feedback extends Alaska$Model<Feedback> {
   title: string;
   user: Object;
   createdAt: Date;
@@ -17,7 +17,7 @@ declare module 'alaska-feedback/models/Feedback' {
   }
 }
 declare module 'alaska-feedback/models/FeedbackComment' {
-  declare export default class FeedbackComment extends Alaska$Model {
+  declare export default class FeedbackComment extends Alaska$Model<FeedbackComment> {
   feedback: Object;
   user: Object;
   createdAt: Date;

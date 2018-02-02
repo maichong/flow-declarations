@@ -5,7 +5,7 @@ declare module 'alaska-address' {
   declare export default AddressService;
 }
 declare module 'alaska-address/model/Address' {
-  declare export default class Address extends Alaska$Model {
+  declare export default class Address extends Alaska$Model<Address> {
   user: Object;
   name: string;
   tel: string;

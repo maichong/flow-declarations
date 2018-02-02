@@ -7,7 +7,7 @@ declare module 'alaska-help' {
   declare export default HelpService;
 }
 declare module 'alaska-help/models/Help' {
-  declare export default class Help extends Alaska$Model {
+  declare export default class Help extends Alaska$Model<Help> {
   title: string;
   parent: Object;
   relations: Object[];

@@ -11,7 +11,7 @@ declare module 'alaska-balance' {
 }
 
 declare module 'alaska-balance/models/Deposit' {
-  declare export default class Deposit extends Alaska$Model {
+  declare export default class Deposit extends Alaska$Model<Deposit> {
   title: string;
   user: User;
   currency: string;
@@ -25,7 +25,7 @@ declare module 'alaska-balance/models/Deposit' {
 import type Deposit from 'alaska-balance/models/Deposit';
 
 declare module 'alaska-balance/models/Income' {
-  declare export default class Income extends Alaska$Model {
+  declare export default class Income extends Alaska$Model<Income> {
   title: string;
   user: User;
   deposit: Deposit;
@@ -38,7 +38,7 @@ declare module 'alaska-balance/models/Income' {
 }
 
 declare module 'alaska-balance/models/Withdraw' {
-  declare export default class Withdraw extends Alaska$Model {
+  declare export default class Withdraw extends Alaska$Model<Withdraw> {
   title: string;
   user: User;
   currency: string;

@@ -9,7 +9,7 @@ declare module 'alaska-shop' {
 }
 
 declare module 'alaska-shop/models/Shop' {
-  declare export default class Shop extends Alaska$Model {
+  declare export default class Shop extends Alaska$Model<Shop> {
   title: string;
   logo: Object;
   user: User;
