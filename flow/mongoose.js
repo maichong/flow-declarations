@@ -70,7 +70,7 @@ type SchemaOpts<Doc> = {
   typeKey?: string,
   useNestedStrict?: boolean,
   validateBeforeSave?: boolean,
-  versionKey?: string,
+  versionKey?: string | false,
   timestamps?:
     | boolean
     | {
@@ -230,7 +230,7 @@ declare class Mongoose$Document {
     data: Object,
     options?: Object
   ): Mongoose$Query<?this, this>;
-  static count(criteria: Object): Promise<number>;
+  static count(criteria?: Object): Promise<number>;
   static remove(criteria: Object): Promise<mixed>;
   static update(
     criteria: Object,
@@ -264,6 +264,7 @@ declare class Mongoose$Document {
   static schema: Mongoose$Schema<this>;
   static on(type: string, cb: Function): void;
 
+  collection: Mongoose$Collection;
   constructor(data?: $Shape<this>): this;
   id: string | number;
   _id: bson$ObjectId | string | number;
@@ -356,7 +357,7 @@ declare class Mongoose$Query<Result, Doc> extends Promise<Result> {
   batchSize(n: number): Mongoose$Query<Result, Doc>;
   collation(value: Object): Mongoose$Query<Result, Doc>;
   comment(val: string): Mongoose$Query<Result, Doc>;
-  cursor(opts: Object): Mongoose$QueryCursor<Doc>;
+  cursor(opts?: Object): Mongoose$QueryCursor<Doc>;
   deleteMany(criteria?: Object): Mongoose$Query<any, Doc>;
   deleteOne(criteria?: Object): Mongoose$Query<any, Doc>;
   distinct(field: string, criteria?: Object): Mongoose$Query<Result, Doc>;
@@ -417,8 +418,8 @@ declare class Mongoose$Query<Result, Doc> extends Promise<Result> {
 
 declare class Mongoose$QueryCursor<Doc> {
   on(type: "data" | "end" | string, cb: Function): void;
-  next(cb: (err: Error, doc: Doc) => void): void;
-  eachAsync(fn:Function, options?: Object, callback?:Function): Promise<void>
+  eachAsync(fn:Function, options?: Object, callback?:Function): Promise<void>;
+  next(cb?: (err: Error, doc: Doc) => void): Promise<?Doc>;
 }
 
 declare class Mongoose$QueryStream {
@@ -511,9 +512,9 @@ declare module "mongoose" {
     Types: Mongoose$Types,
     Promise: any,
     model: $PropertyType<Mongoose$Connection, "model">,
-    createConnection(uri?: string): Mongoose$Connection,
+    createConnection(uri?: string, options?: Object): Mongoose$Connection,
     set: (key: string, value: string | Function | boolean) => void,
-    connect: Function,
+    connect: (uri: string, options?: Object) => void,
     connection: Mongoose$Connection,
     connections: Mongoose$Connection[],
     Query: typeof Mongoose$Query,

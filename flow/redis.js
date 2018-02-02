@@ -564,8 +564,8 @@ declare module redis {
 
     subscribe(args: Array<any>, callback?: Function):this;
     SUBSCRIBE(args: Array<any>, callback?: Function):this;
-    subscribe(key: string, args: Array<any>, callback?: Function):this;
-    SUBSCRIBE(key: string, args: Array<any>, callback?: Function):this;
+    subscribe(key: string, args?: Array<any>, callback?: Function):this;
+    SUBSCRIBE(key: string, args?: Array<any>, callback?: Function):this;
 
     substr(key: string, v1: any, v2: any, callback?: Function):this;
     SUBSTR(key: string, v1: any, v2: any, callback?: Function):this;

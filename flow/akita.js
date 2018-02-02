@@ -17,7 +17,8 @@ declare class Akita$Model<+T> {
   update(id: string | number, data: Object): Akita$Query<T>;
   remove(conditions?: Object | string | number): Akita$Query<void>;
   count(conditions?: Object): Akita$Query<number>;
-  find(conditions?: Object): Akita$Query<Akita$PaginateResult<T>>;
+  paginate(conditions?: Object): Akita$Query<Akita$PaginateResult<T>>;
+  find(conditions?: Object): Akita$Query<T[]>;
   findById(conditions: number | string): Akita$Query<T | null>;
   findOne(conditions?: Object): Akita$Query<T | null>;
   findAll(conditions?: Object): Akita$Query<T[]>;
@@ -82,7 +83,7 @@ type Akita$Client = {
   trace(path: string, init?: Akita$RequestInit): Akita$Result<null>;
   connect(path: string, init?: Akita$RequestInit): Akita$Result<null>;
 
-  (path: string): Akita$Model<*>;
+  (path: string): Akita$Model<Object>;
 }
 
 declare module 'akita' {

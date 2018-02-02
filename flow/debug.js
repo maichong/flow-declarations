@@ -1,14 +1,16 @@
 // copy from https://github.com/flowtype/flow-typed/blob/master/definitions/npm/debug_v3.x.x/flow_v0.28.x-/debug_v3.x.x.js
 
-declare module 'debug' {
+declare module "debug" {
   declare type Debugger = {
     (...args: Array<mixed>): void,
     (formatter: string, ...args: Array<mixed>): void,
     (err: Error, ...args: Array<mixed>): void,
     enabled: boolean,
     log: () => {},
-    namespace: string;
+    namespace: string
   };
+
+  declare module.exports: (namespace: string) => Debugger;
 
   declare var names: Array<string>;
   declare var skips: Array<string>;
@@ -24,6 +26,4 @@ declare module 'debug' {
   declare var formatters: {
     [formatter: string]: () => {}
   };
-
-  declare module.exports: (namespace: string)=> Debugger;
-};
+}

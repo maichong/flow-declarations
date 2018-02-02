@@ -1,4 +1,4 @@
-// copy from https://github.com/flowtype/flow-typed/blob/master/definitions/npm/mocha_v4.x.x/flow_v0.28.x-/mocha_v4.x.x.js
+// copy from https://github.com/flowtype/flow-typed/blob/master/definitions/npm/mocha_v5.x.x/flow_v0.28.x-/mocha_v5.x.x.js
 
 declare interface $npm$mocha$SetupOptions {
   slow?: number;

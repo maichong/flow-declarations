@@ -19,7 +19,7 @@ const tmpDir = Path.join(process.cwd(), 'tmp');
 const flowDir = Path.join(process.cwd(), 'flow');
 
 function downloadAsync() {
-  if (isDirectory(tmpDir)) {
+  if (isDirectory.sync(tmpDir)) {
     del.sync(tmpDir);
     mkdirp.sync(tmpDir);
   }
@@ -60,7 +60,7 @@ function copy(name, version) {
   let data = fs.readFileSync(srcFile, 'utf8');
 
   data = `// copy from https://github.com/flowtype/flow-typed/blob/master/definitions/npm/${name}_${version}/${subDir}/${name}_${version}.js\n\n` + data;
-  
+
   fs.writeFileSync(destFile, data);
 }
 
