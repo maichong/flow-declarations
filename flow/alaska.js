@@ -1,4 +1,4 @@
-import type { WriteStream, Stats } from 'fs';
+import type { Stats } from 'fs';
 import type Debugger from 'debug';
 import type Router from 'koa-router';
 import type Koa, { Context } from 'koa';
@@ -64,7 +64,6 @@ declare type Alaska$UploadFile = {
 }
 
 declare type Alaska$Context = Context & {
-
   sessionKey: string;
   sessionId: string;
   files: { [name: string]: Object };
@@ -80,7 +79,10 @@ declare type Alaska$Context = Context & {
     c: Function;
     t: Function;
     env: string;
-    [key: string]: any
+    [key: string]: any,
+    record?: Alaska$Model<*>,
+    paginateResults?: Alaska$PaginateResult<*>,
+    listResults?: Alaska$Model<*>[]
   };
   panic: (message: string | number, code?: number) => void;
   error: (message: string | number, code?: number) => void;
@@ -306,6 +308,13 @@ declare interface Alaska$FieldGroup {
   disabled?: DependsQueryExpression,
 }
 
+type UpdateResult = {
+  nMatched: number,
+  nUpserted: number,
+  nModified: number,
+  ok?: boolean
+};
+
 declare class Alaska$Model<+M> extends events$EventEmitter {
 
 [field: string]: any;
@@ -351,13 +360,13 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
 
   static remove(conditions: Object, callback?: Function): Alaska$Query<void>;
   static find(conditions?: Object, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M[]>;
-  static findById(id: Object | string | number, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M>;
-  static findByIdAndUpdate(id: Object | string | number, update: Object, options?: Object, callback?: Function): Alaska$Query<M>;
-  static findByIdAndRemove(id: Object | string | number, options?: Object, callback?: Function): Alaska$Query<M>;
-  static findOne(conditions?: Object, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M>;
-  static findOneAndUpdate(conditions: Object, update: Object, options?: Object, callback?: Function): Alaska$Query<M>;
-  static findOneAndRemove(conditions: Object, options?: Object, callback?: Function): Alaska$Query<M>;
-  static update(conditions: Object, doc: Object, options?: Object, callback?: Function): Alaska$Query<M>;
+  static findById(id: Object | string | number, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
+  static findByIdAndUpdate(id: Object | string | number, update: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
+  static findByIdAndRemove(id: Object | string | number, options?: Object, callback?: Function): Alaska$Query<M | null>;
+  static findOne(conditions?: Object, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
+  static findOneAndUpdate(conditions: Object, update: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
+  static findOneAndRemove(conditions: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
+  static update(conditions: Object, doc: Object, options?: Object, callback?: Function): Alaska$Query<UpdateResult>;
   static count(conditions?: Object, callback?: Function): Alaska$Query<number>;
   static distinct(field: string, conditions?: Object, callback?: Function): Alaska$Query<M>;
   static where(path: string | Object, val?: any): Alaska$Query<M>;
@@ -852,6 +861,23 @@ declare class Alaska$NormalError extends Error {
   constructor(message: string | number, code?: number): void;
 }
 
+declare type Alaska$utils = {
+  statAsync(path: string): Promise<Stats>,
+  isFile(path: string): boolean,
+  isDirectory(path: string): boolean,
+  readJson(path: string): Object,
+  isHidden(path: string): boolean,
+  resolved(): Promise<null>,
+  noop(): void,
+  bindMethods(obj: Object, scope: Object): Object,
+  escapeRegExp(str: string): string,
+  isObjectId(id: string): boolean,
+  nameToKey(name: string): string,
+  deepClone(target: Object, patch: Object): Object,
+  merge(target: Object, patch: Object): Object,
+  parseAcceptLanguage(header: string): string[],
+}
+
 declare module alaska {
   declare export var NormalError: Class<Alaska$NormalError>;
   declare export var Alaska: Class<Alaska$Alaska>;
@@ -861,7 +887,7 @@ declare module alaska {
   declare export var Field: Class<Alaska$Field>;
   declare export var Renderer: Class<Alaska$Renderer>;
   declare export var Driver: Class<Alaska$Driver>;
-  declare export var utils: Object;
+  declare export var utils: Alaska$utils;
   declare export var CLOSED: 0;
   declare export var PUBLIC: 1;
   declare export var AUTHENTICATED: 2;
@@ -870,32 +896,5 @@ declare module alaska {
 }
 
 declare module 'alaska/utils' {
-
-  declare function statAsync(path: string): Promise<Stats>;
-
-  declare function isFile(path: string): boolean;
-
-  declare function isDirectory(path: string): boolean;
-
-  declare function readJson(path: string): Object;
-
-  declare function isHidden(path: string): boolean;
-
-  declare function resolved(): Promise<null>;
-
-  declare function noop(): void;
-
-  declare function bindMethods(obj: Object, scope: Object): Object;
-
-  declare function escapeRegExp(str: string): string;
-
-  declare function isObjectId(id: string): boolean;
-
-  declare function nameToKey(name: string): string;
-
-  declare function deepClone(target: Object, patch: Object): Object;
-
-  declare function merge(target: Object, patch: Object): Object;
-
-  declare function parseAcceptLanguage(header: string): string[];
+  declare module .exports: Alaska$utils
 }
