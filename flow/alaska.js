@@ -335,7 +335,7 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
   unmarkModified(path: string): void;
   $ignore(path: string): void;
   modifiedPaths(): string[];
-  isModified(paths: string | string[]): boolean;
+  isModified(paths?: string | string[]): boolean;
   $isDefault(path: string): boolean;
   isDirectModified(path: string): boolean;
   isInit(path: string): boolean;
@@ -459,7 +459,7 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
   };
   static virtuals: {};
   static api: {
-    all?: number,
+    paginate?: number,
     list?: number,
     show?: number,
     count?: number,

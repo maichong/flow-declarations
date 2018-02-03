@@ -1,8 +1,13 @@
-// TODO
-
 declare module 'lru-cache' {
+  declare interface Options {
+    max?: number,
+    length?: number,
+    dispose?: Function,
+    maxAge?: number,
+    stale?: any
+  }
+
   declare class LRU {
-    constructor(options: { max?: number, length?: number, dispose?: Function, maxAge?: number, stale?: any }): void;
     set(key: string, value: any, maxAge?: number): any;
     get(key: string): any;
     peek(key: string): any;
@@ -20,5 +25,5 @@ declare module 'lru-cache' {
     itemCount: number;
   }
 
-  declare module.exports: Class<LRU>;
+  declare module .exports: (options: Options) => LRU
 }
