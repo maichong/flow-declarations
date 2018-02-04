@@ -1,15 +1,12 @@
 {
   "name": "flow-declarations",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Flow declarations",
   "keywords": [
     "flow",
     "declarations",
     "definitions",
     "flow-typed"
-  ],
-  "files": [
-    "flow"
   ],
   "scripts": {
     "download": "node scripts/download.js"
