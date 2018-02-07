@@ -1,5 +1,6 @@
 declare module ajv {
-  declare interface Ajv {
+  declare class Ajv {
+    constructor(options?: Options): void;
     /**
      * Validate data using schema
      * Schema will be compiled and cached (using serialized JSON as key, [fast-json-stable-stringify](https://github.com/epoberezkin/fast-json-stable-stringify) is used to serialize by default).
@@ -147,9 +148,9 @@ declare module ajv {
     missingRefs?: true | 'ignore' | 'fail';
     extendRefs?: true | 'ignore' | 'fail';
     loadSchema?: (uri: string, cb?: (err: Error, schema: Object) => void) => Thenable<Object | boolean>;
-    removeAdditional?: boolean | 'all' | 'failing';
+    +removeAdditional?: boolean | 'all' | 'failing';
     useDefaults?: boolean | 'shared';
-    coerceTypes?: boolean | 'array';
+    +coerceTypes?: boolean | 'array';
     async?: boolean | string;
     transpile?: string | ((code: string) => string);
     meta?: boolean | Object;
