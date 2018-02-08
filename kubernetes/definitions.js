@@ -262,3 +262,8 @@ declare interface Kube$VolumeMount {
   readOnly?: boolean;
   subPath?: string;
 }
+
+declare interface Kube$WatchEvent<T> {
+  type: 'ADDED' | 'MODIFIED' | 'DELETED' | 'ERROR';
+  object: T
+}
