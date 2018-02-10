@@ -1,7 +1,7 @@
 // copy from https://github.com/flowtype/flow-typed/blob/master/definitions/npm/socket.io-client_v2.x.x/flow_v0.34.x-/socket.io-client_v2.x.x.js
 
 declare module "socket.io-client" {
-  declare type Callback = (...args: mixed[]) => void;
+  declare type Callback = (...args: any[]) => any;
 
   declare type ManagerOptions = $Shape<{
     path: string,
