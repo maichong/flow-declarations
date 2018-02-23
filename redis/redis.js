@@ -1356,15 +1356,15 @@ declare module redis {
     server_info: ServerInfo;
     stream: stream$Duplex;
 
-    on(event: 'message' | 'message_buffer', listener: (channel: string, message: string) => void): RedisClient;
+    on(event: 'message' | 'message_buffer', listener: (channel: string, message: string) => any): RedisClient;
 
-    on(event: 'pmessage' | 'pmessage_buffer', listener: (pattern: string, channel: string, message: string) => void): RedisClient;
+    on(event: 'pmessage' | 'pmessage_buffer', listener: (pattern: string, channel: string, message: string) => any): RedisClient;
 
-    on(event: 'subscribe' | 'unsubscribe', listener: (channel: string, count: number) => void): RedisClient;
+    on(event: 'subscribe' | 'unsubscribe', listener: (channel: string, count: number) => any): RedisClient;
 
-    on(event: 'psubscribe' | 'punsubscribe', listener: (pattern: string, count: number) => void): RedisClient;
+    on(event: 'psubscribe' | 'punsubscribe', listener: (pattern: string, count: number) => any): RedisClient;
 
-    on(event: string, listener: (...args: any[]) => void): RedisClient;
+    on(event: string, listener: (...args: any[]) => any): RedisClient;
 
     /**
      * Client methods.

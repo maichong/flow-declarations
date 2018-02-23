@@ -1,257 +1,257 @@
 // copy from https://github.com/flowtype/flow-typed/blob/master/definitions/npm/socket.io_v1.x.x/flow_v0.47.x-/socket.io_v1.x.x.js
 
 declare module 'socket.io' {
-    declare var server: SocketIOStatic;
-    declare module.exports: typeof server
+  declare var server: SocketIOStatic;
+  declare module.exports: typeof server
 }
 
 
 declare interface SocketIOStatic {
 
-    /**
-     * Default Server constructor
-     */
-    (): SocketIO$Server,
+  /**
+   * Default Server constructor
+   */
+  (): SocketIO$Server,
 
-    /**
-     * Creates a new Server
-     * @param srv The HTTP server that we're going to bind to
-     * @param opts An optional parameters object
-     */
-    (srv: any, opts?: SocketIO$ServerOptions): SocketIO$Server,
+  /**
+   * Creates a new Server
+   * @param srv The HTTP server that we're going to bind to
+   * @param opts An optional parameters object
+   */
+  (srv: any, opts?: SocketIO$ServerOptions): SocketIO$Server,
 
-    /**
-     * Creates a new Server
-     * @param port A port to bind to, as a number, or a string
-     * @param An optional parameters object
-     */
-    (port: string | number, opts?: SocketIO$ServerOptions): SocketIO$Server,
+  /**
+   * Creates a new Server
+   * @param port A port to bind to, as a number, or a string
+   * @param An optional parameters object
+   */
+  (port: string | number, opts?: SocketIO$ServerOptions): SocketIO$Server,
 
-    /**
-     * Creates a new Server
-     * @param A parameters object
-     */
-    (opts: SocketIO$ServerOptions): SocketIO$Server,
+  /**
+   * Creates a new Server
+   * @param A parameters object
+   */
+  (opts: SocketIO$ServerOptions): SocketIO$Server,
 
-    /**
-     * Backwards compatibility
-     * @see  io().listen()
-     */
-    listen: SocketIOStatic
+  /**
+   * Backwards compatibility
+   * @see  io().listen()
+   */
+  listen: SocketIOStatic
 }
 
 
 declare interface SocketIO$Server {
-    engine: {
-        ws: any
-    },
+  engine: {
+    ws: any
+  },
 
-    /**
-     * A dictionary of all the namespaces currently on this Server
-     */
-    nsps: {
-        [namespace: string]: SocketIO$Namespace
-    },
+  /**
+   * A dictionary of all the namespaces currently on this Server
+   */
+  nsps: {
+    [namespace: string]: SocketIO$Namespace
+  },
 
-    /**
-     * The default '/' Namespace
-     */
-    sockets: SocketIO$Namespace,
+  /**
+   * The default '/' Namespace
+   */
+  sockets: SocketIO$Namespace,
 
-    /**
-     * Sets the 'json' flag when emitting an event
-     */
-    json: SocketIO$Server,
+  /**
+   * Sets the 'json' flag when emitting an event
+   */
+  json: SocketIO$Server,
 
-    /**
-     * Server request verification function, that checks for allowed origins
-     * @param req The http.IncomingMessage request
-     * @param fn The callback to be called. It should take one parameter, err,
-    which will be null if there was no problem, and one parameter, success,
-    of type boolean
-    */
-    checkRequest(req: any, fn: (err: any, success: boolean) => void): void,
+  /**
+   * Server request verification function, that checks for allowed origins
+   * @param req The http.IncomingMessage request
+   * @param fn The callback to be called. It should take one parameter, err,
+  which will be null if there was no problem, and one parameter, success,
+  of type boolean
+  */
+  checkRequest(req: any, fn: (err: any, success: boolean) => void): void,
 
-    /**
-     * Gets whether we're serving the client.js file or not
-     * @default  true
-     */
-    serveClient(): boolean,
+  /**
+   * Gets whether we're serving the client.js file or not
+   * @default  true
+   */
+  serveClient(): boolean,
 
-    /**
-     * Sets whether we're serving the client.js file or not
-     * @param v True if we want to serve the file, false otherwise
-     * @default  true
-     * @return  This Server
-     */
-    serveClient(v: boolean): SocketIO$Server,
+  /**
+   * Sets whether we're serving the client.js file or not
+   * @param v True if we want to serve the file, false otherwise
+   * @default  true
+   * @return  This Server
+   */
+  serveClient(v: boolean): SocketIO$Server,
 
-    /**
-     * Gets the client serving path
-     * @default  '/socket.io'
-     */
-    path(): string,
+  /**
+   * Gets the client serving path
+   * @default  '/socket.io'
+   */
+  path(): string,
 
-    /**
-     * Sets the client serving path
-     * @param v The path to serve the client file on
-     * @default  '/socket.io'
-     * @return  This Server
-     */
-    path(v: string): SocketIO$Server,
+  /**
+   * Sets the client serving path
+   * @param v The path to serve the client file on
+   * @default  '/socket.io'
+   * @return  This Server
+   */
+  path(v: string): SocketIO$Server,
 
-    /**
-     * Gets the adapter that we're going to use for handling rooms
-     * @default  typeof Adapter
-     */
-    adapter(): any,
+  /**
+   * Gets the adapter that we're going to use for handling rooms
+   * @default  typeof Adapter
+   */
+  adapter(): any,
 
-    /**
-     * Sets the adapter (class) that we're going to use for handling rooms
-     * @param v The class for the adapter to create
-     * @default  typeof Adapter
-     * @return  This Server
-     */
-    adapter(v: any): SocketIO$Server,
+  /**
+   * Sets the adapter (class) that we're going to use for handling rooms
+   * @param v The class for the adapter to create
+   * @default  typeof Adapter
+   * @return  This Server
+   */
+  adapter(v: any): SocketIO$Server,
 
-    /**
-     * Gets the allowed origins for requests
-     * @default  "*:*"
-     */
-    origins(): string,
+  /**
+   * Gets the allowed origins for requests
+   * @default  "*:*"
+   */
+  origins(): string,
 
-    /**
-     * Sets the allowed origins for requests
-     * @param v The allowed origins, in host:port form
-     * @default  "*:*"
-    return This Server
-    */
-    origins(v: string): SocketIO$Server,
+  /**
+   * Sets the allowed origins for requests
+   * @param v The allowed origins, in host:port form
+   * @default  "*:*"
+  return This Server
+  */
+  origins(v: string): SocketIO$Server,
 
-    /**
-     * Attaches socket.io to a server
-     * @param srv The http.Server that we want to attach to
-     * @param opts An optional parameters object
-     * @return  This Server
-     */
-    attach(srv: any, opts?: SocketIO$ServerOptions): SocketIO$Server,
+  /**
+   * Attaches socket.io to a server
+   * @param srv The http.Server that we want to attach to
+   * @param opts An optional parameters object
+   * @return  This Server
+   */
+  attach(srv: any, opts?: SocketIO$ServerOptions): SocketIO$Server,
 
-    /**
-     * Attaches socket.io to a port
-     * @param port The port that we want to attach to
-     * @param opts An optional parameters object
-     * @return  This Server
-     */
-    attach(port: number, opts?: SocketIO$ServerOptions): SocketIO$Server,
+  /**
+   * Attaches socket.io to a port
+   * @param port The port that we want to attach to
+   * @param opts An optional parameters object
+   * @return  This Server
+   */
+  attach(port: number, opts?: SocketIO$ServerOptions): SocketIO$Server,
 
-    /**
-     *
-     * @see  attach( srv, opts )
-     */
-    listen(srv: any, opts?: SocketIO$ServerOptions): SocketIO$Server,
+  /**
+   *
+   * @see  attach( srv, opts )
+   */
+  listen(srv: any, opts?: SocketIO$ServerOptions): SocketIO$Server,
 
-    /**
-     *
-     * @see  attach( port, opts )
-     */
-    listen(port: number, opts?: SocketIO$ServerOptions): SocketIO$Server,
+  /**
+   *
+   * @see  attach( port, opts )
+   */
+  listen(port: number, opts?: SocketIO$ServerOptions): SocketIO$Server,
 
-    /**
-     * Binds socket.io to an engine.io intsance
-     * @param src The Engine.io (or compatible) server to bind to
-     * @return  This Server
-     */
-    bind(srv: any): SocketIO$Server,
+  /**
+   * Binds socket.io to an engine.io intsance
+   * @param src The Engine.io (or compatible) server to bind to
+   * @return  This Server
+   */
+  bind(srv: any): SocketIO$Server,
 
-    /**
-     * Called with each incoming connection
-     * @param socket The Engine.io Socket
-     * @return  This Server
-     */
-    onconnection(socket: any): SocketIO$Server,
+  /**
+   * Called with each incoming connection
+   * @param socket The Engine.io Socket
+   * @return  This Server
+   */
+  onconnection(socket: any): SocketIO$Server,
 
-    /**
-     * Looks up/creates a Namespace
-     * @param nsp The name of the NameSpace to look up/create. Should start
-    with a '/'
-     * @return  The Namespace
-    */
-    of (nsp: string): SocketIO$Namespace,
+  /**
+   * Looks up/creates a Namespace
+   * @param nsp The name of the NameSpace to look up/create. Should start
+  with a '/'
+   * @return  The Namespace
+  */
+  of(nsp: string): SocketIO$Namespace,
 
-    /**
-     * Closes the server connection
-     */
-    close(fn?: () => void): void,
+  /**
+   * Closes the server connection
+   */
+  close(fn?: () => void): void,
 
-    /**
-     * Base 'on' method to add a listener for an event
-     * @param event The event that we want to add a listener for
-     * @param listener The callback to call when we get the event. The parameters
-    for the callback depend on the event
-     * @return  The default '/' Namespace
-    */
-    on(event: string, listener: Function): SocketIO$Namespace,
+  /**
+   * Base 'on' method to add a listener for an event
+   * @param event The event that we want to add a listener for
+   * @param listener The callback to call when we get the event. The parameters
+  for the callback depend on the event
+   * @return  The default '/' Namespace
+  */
+  on(event: string, listener: Function): SocketIO$Namespace,
 
-    /**
-     * Targets a room when emitting to the default '/' Namespace
-     * @param room The name of the room that we're targeting
-     * @return  The default '/' Namespace
-     */
-    to(room: string): SocketIO$Namespace,
+  /**
+   * Targets a room when emitting to the default '/' Namespace
+   * @param room The name of the room that we're targeting
+   * @return  The default '/' Namespace
+   */
+  to(room: string): SocketIO$Namespace,
 
-    /**
-     *
-     * @see  to( room )
-     */
-    in (room: string): SocketIO$Namespace,
+  /**
+   *
+   * @see  to( room )
+   */
+  in(room: string): SocketIO$Namespace,
 
-    /**
-     * Registers a middleware function, which is a function that gets executed
-     * for every incoming Socket, on the default '/' Namespace
-     * @param fn The function to call when we get a new incoming socket. It should
-    take one parameter of type Socket, and one callback function to call to
-    execute the next middleware function. The callback can take one optional
-    parameter, err, if there was an error. Errors passed to middleware callbacks
-    are sent as special 'error' packets to clients
-     * @return  The default '/' Namespace
-    */
-    use(
-        fn: (socket: SocketIO$Socket, fn: (err?: any) => void) => void): SocketIO$Namespace,
+  /**
+   * Registers a middleware function, which is a function that gets executed
+   * for every incoming Socket, on the default '/' Namespace
+   * @param fn The function to call when we get a new incoming socket. It should
+  take one parameter of type Socket, and one callback function to call to
+  execute the next middleware function. The callback can take one optional
+  parameter, err, if there was an error. Errors passed to middleware callbacks
+  are sent as special 'error' packets to clients
+   * @return  The default '/' Namespace
+  */
+  use(
+    fn: (socket: SocketIO$Socket, fn: (err?: any) => void) => any): SocketIO$Namespace,
 
-    /**
-     * Emits an event to the default Namespace
-     * @param event The event that we want to emit
-     * @param args Any number of optional arguments to pass with the event. If the
-    last argument is a function, it will be called as an ack. The ack should
-    take whatever data was sent with the packet
-     * @return  The default '/' Namespace
-    */
-    emit(event: string, ...args: any[]): SocketIO$Namespace,
+  /**
+   * Emits an event to the default Namespace
+   * @param event The event that we want to emit
+   * @param args Any number of optional arguments to pass with the event. If the
+  last argument is a function, it will be called as an ack. The ack should
+  take whatever data was sent with the packet
+   * @return  The default '/' Namespace
+  */
+  emit(event: string, ...args: any[]): SocketIO$Namespace,
 
-    /**
-     * Sends a 'message' event
-     * @see  emit( event, ...args )
-     * @return  The default '/' Namespace
-     */
-    send(...args: any[]): SocketIO$Namespace,
+  /**
+   * Sends a 'message' event
+   * @see  emit( event, ...args )
+   * @return  The default '/' Namespace
+   */
+  send(...args: any[]): SocketIO$Namespace,
 
-    /**
-     *
-     * @see  send( ...args )
-     */
-    write(...args: any[]): SocketIO$Namespace,
+  /**
+   *
+   * @see  send( ...args )
+   */
+  write(...args: any[]): SocketIO$Namespace,
 
-    /**
-     * Gets a list of clients
-     * @return  The default '/' Namespace
-     */
-    clients(...args: any[]): SocketIO$Namespace,
+  /**
+   * Gets a list of clients
+   * @return  The default '/' Namespace
+   */
+  clients(...args: any[]): SocketIO$Namespace,
 
-    /**
-     * Sets the compress flag
-     * @return  The default '/' Namespace
-     */
-    compress(...args: any[]): SocketIO$Namespace
+  /**
+   * Sets the compress flag
+   * @return  The default '/' Namespace
+   */
+  compress(...args: any[]): SocketIO$Namespace
 }
 
 
@@ -260,92 +260,92 @@ declare interface SocketIO$Server {
  */
 declare interface SocketIO$ServerOptions {
 
-    /**
-     * The path to server the client file to
-     * @default  '/socket.io'
-     */
-    path?: string,
+  /**
+   * The path to server the client file to
+   * @default  '/socket.io'
+   */
+  path?: string,
 
-    /**
-     * Should we serve the client file?
-     * @default  true
-     */
-    serveClient?: boolean,
+  /**
+   * Should we serve the client file?
+   * @default  true
+   */
+  serveClient?: boolean,
 
-    /**
-     * The adapter to use for handling rooms. NOTE: this should be a class,
-     * not an object
-     * @default  typeof Adapter
-     */
-    adapter?: SocketIO$Adapter,
+  /**
+   * The adapter to use for handling rooms. NOTE: this should be a class,
+   * not an object
+   * @default  typeof Adapter
+   */
+  adapter?: SocketIO$Adapter,
 
-    /**
-     * Accepted origins
-     * @default  '*:*'
-     */
-    origins?: string,
+  /**
+   * Accepted origins
+   * @default  '*:*'
+   */
+  origins?: string,
 
-    /**
-     * How many milliseconds without a pong packed to consider the connection closed (engine.io)
-     * @default  60000
-     */
-    pingTimeout?: number,
+  /**
+   * How many milliseconds without a pong packed to consider the connection closed (engine.io)
+   * @default  60000
+   */
+  pingTimeout?: number,
 
-    /**
-     * How many milliseconds before sending a new ping packet (keep-alive) (engine.io)
-     * @default  25000
-     */
-    pingInterval?: number,
+  /**
+   * How many milliseconds before sending a new ping packet (keep-alive) (engine.io)
+   * @default  25000
+   */
+  pingInterval?: number,
 
-    /**
-     * How many bytes or characters a message can be when polling, before closing the session
-     * (to avoid Dos) (engine.io)
-     * @default  10E7
-     */
-    maxHttpBufferSize?: number,
+  /**
+   * How many bytes or characters a message can be when polling, before closing the session
+   * (to avoid Dos) (engine.io)
+   * @default  10E7
+   */
+  maxHttpBufferSize?: number,
 
-    /**
-     * A function that receives a given handshake or upgrade request as its first parameter,
-     * and can decide whether to continue or not. The second argument is a function that needs
-    to be called with the decided information: fn( err, success ), where success is a boolean
-    value where false means that the request is rejected, and err is an error code (engine.io)
-     * @default  null
-    */
-    allowRequest?: (request: any, callback: (err: number, success: boolean) => void) => void,
+  /**
+   * A function that receives a given handshake or upgrade request as its first parameter,
+   * and can decide whether to continue or not. The second argument is a function that needs
+  to be called with the decided information: fn( err, success ), where success is a boolean
+  value where false means that the request is rejected, and err is an error code (engine.io)
+   * @default  null
+  */
+  allowRequest?: (request: any, callback: (err: number, success: boolean) => void) => void,
 
-    /**
-     * Transports to allow connections to (engine.io)
-     * @default  ['polling','websocket']
-     */
-    transports?: string[],
+  /**
+   * Transports to allow connections to (engine.io)
+   * @default  ['polling','websocket']
+   */
+  transports?: string[],
 
-    /**
-     * Whether to allow transport upgrades (engine.io)
-     * @default  true
-     */
-    allowUpgrades?: boolean,
+  /**
+   * Whether to allow transport upgrades (engine.io)
+   * @default  true
+   */
+  allowUpgrades?: boolean,
 
-    /**
-     * parameters of the WebSocket permessage-deflate extension (see ws module).
-     * Set to false to disable (engine.io)
-     * @default  true
-     */
-    perMessageDeflate?: Object | boolean,
+  /**
+   * parameters of the WebSocket permessage-deflate extension (see ws module).
+   * Set to false to disable (engine.io)
+   * @default  true
+   */
+  perMessageDeflate?: Object | boolean,
 
-    /**
-     * Parameters of the http compression for the polling transports (see zlib).
-     * Set to false to disable, or set an object with parameter "threshold:number"
-    to only compress data if the byte size is above this value (1024) (engine.io)
-     * @default  true|1024
-    */
-    httpCompression?: Object | boolean,
+  /**
+   * Parameters of the http compression for the polling transports (see zlib).
+   * Set to false to disable, or set an object with parameter "threshold:number"
+  to only compress data if the byte size is above this value (1024) (engine.io)
+   * @default  true|1024
+  */
+  httpCompression?: Object | boolean,
 
-    /**
-     * Name of the HTTP cookie that contains the client sid to send as part of
-     * handshake response headers. Set to false to not send one (engine.io)
-     * @default  "io"
-     */
-    cookie?: string | boolean
+  /**
+   * Name of the HTTP cookie that contains the client sid to send as part of
+   * handshake response headers. Set to false to not send one (engine.io)
+   * @default  "io"
+   */
+  cookie?: string | boolean
 }
 
 
@@ -355,115 +355,115 @@ declare interface SocketIO$ServerOptions {
  */
 declare type SocketIO$Namespace = {
 
-    /**
-     * The name of the NameSpace
-     */
-    name: string,
+  /**
+   * The name of the NameSpace
+   */
+  name: string,
 
-    /**
-     * The controller Server for this Namespace
-     */
-    server: SocketIO$Server,
+  /**
+   * The controller Server for this Namespace
+   */
+  server: SocketIO$Server,
 
-    /**
-     * A dictionary of all the Sockets connected to this Namespace, where
-     * the Socket ID is the key
-     */
-    sockets: {
-        [id: string]: SocketIO$Socket
-    },
+  /**
+   * A dictionary of all the Sockets connected to this Namespace, where
+   * the Socket ID is the key
+   */
+  sockets: {
+    [id: string]: SocketIO$Socket
+  },
 
-    /**
-     * A dictionary of all the Sockets connected to this Namespace, where
-     * the Socket ID is the key
-     */
-    connected: {
-        [id: string]: SocketIO$Socket
-    },
+  /**
+   * A dictionary of all the Sockets connected to this Namespace, where
+   * the Socket ID is the key
+   */
+  connected: {
+    [id: string]: SocketIO$Socket
+  },
 
-    /**
-     * The Adapter that we're using to handle dealing with rooms etc
-     */
-    adapter: SocketIO$Adapter,
+  /**
+   * The Adapter that we're using to handle dealing with rooms etc
+   */
+  adapter: SocketIO$Adapter,
 
-    /**
-     * Sets the 'json' flag when emitting an event
-     */
-    json: SocketIO$Namespace,
+  /**
+   * Sets the 'json' flag when emitting an event
+   */
+  json: SocketIO$Namespace,
 
-    /**
-     * Registers a middleware function, which is a function that gets executed
-     * for every incoming Socket
-     * @param fn The function to call when we get a new incoming socket. It should
-    take one parameter of type Socket, and one callback function to call to
-    execute the next middleware function. The callback can take one optional
-    parameter, err, if there was an error. Errors passed to middleware callbacks
-    are sent as special 'error' packets to clients
-     * @return  This Namespace
-    */
-    use(
-        fn: (socket: SocketIO$Socket, fn: (err?: any) => void) => void): SocketIO$Namespace,
+  /**
+   * Registers a middleware function, which is a function that gets executed
+   * for every incoming Socket
+   * @param fn The function to call when we get a new incoming socket. It should
+  take one parameter of type Socket, and one callback function to call to
+  execute the next middleware function. The callback can take one optional
+  parameter, err, if there was an error. Errors passed to middleware callbacks
+  are sent as special 'error' packets to clients
+   * @return  This Namespace
+  */
+  use(
+    fn: (socket: SocketIO$Socket, fn: (err?: any) => void) => void): SocketIO$Namespace,
 
-    /**
-     * Targets a room when emitting
-     * @param room The name of the room that we're targeting
-     * @return  This Namespace
-     */
-    to(room: string): SocketIO$Namespace,
+  /**
+   * Targets a room when emitting
+   * @param room The name of the room that we're targeting
+   * @return  This Namespace
+   */
+  to(room: string): SocketIO$Namespace,
 
-    /**
-     *
-     * @see  to( room )
-     */
-    in (room: string): SocketIO$Namespace,
+  /**
+   *
+   * @see  to( room )
+   */
+  in(room: string): SocketIO$Namespace,
 
-    /**
-     * Sends a 'message' event
-     * @see  emit( event, ...args )
-     * @return  This Namespace
-     */
-    send(...args: any[]): SocketIO$Namespace,
+  /**
+   * Sends a 'message' event
+   * @see  emit( event, ...args )
+   * @return  This Namespace
+   */
+  send(...args: any[]): SocketIO$Namespace,
 
-    /**
-     *
-     * @see  send( ...args )
-     */
-    write(...args: any[]): SocketIO$Namespace,
+  /**
+   *
+   * @see  send( ...args )
+   */
+  write(...args: any[]): SocketIO$Namespace,
 
-    /**
-     * The event fired when we get a new connection
-     * @param event The event being fired: 'connection'
-     * @param listener A listener that should take one parameter of type Socket
-     * @return  This Namespace
-     */
-    on(event: 'connection', listener: (socket: SocketIO$Socket) => void): SocketIO$Namespace,
+  /**
+   * The event fired when we get a new connection
+   * @param event The event being fired: 'connection'
+   * @param listener A listener that should take one parameter of type Socket
+   * @return  This Namespace
+   */
+  on(event: 'connection', listener: (socket: SocketIO$Socket) => void): SocketIO$Namespace,
 
-    /**
-     *
-     * @see  on( 'connection', listener )
-     */
-    on(event: 'connect', listener: (socket: SocketIO$Socket) => void): SocketIO$Namespace,
+  /**
+   *
+   * @see  on( 'connection', listener )
+   */
+  on(event: 'connect', listener: (socket: SocketIO$Socket) => void): SocketIO$Namespace,
 
-    /**
-     * Base 'on' method to add a listener for an eventThis Namespace
-     * @param event The event that we want to add a listener for
-     * @param listener The callback to call when we get the event. The parameters
-    for the callback depend on the event
-    */
-    on(event: string, listener: Function): SocketIO$Namespace,
+  /**
+   * Base 'on' method to add a listener for an eventThis Namespace
+   * @param event The event that we want to add a listener for
+   * @param listener The callback to call when we get the event. The parameters
+  for the callback depend on the event
+  */
+  on(event: string, listener: Function): SocketIO$Namespace,
 
-    /**
-     * Gets a list of clients.
-     * @return  This Namespace
-     */
-    clients(fn: Function): SocketIO$Namespace,
+  /**
+   * Gets a list of clients.
+   * @return  This Namespace
+   */
+  clients(fn: Function): SocketIO$Namespace,
 
-    /**
-     * Sets the compress flag.
-     * @param compress If `true`, compresses the sending data
-     * @return  This Namespace
-     */
-    compress(compress: boolean): SocketIO$Namespace
+  /**
+   * Sets the compress flag.
+   * @param compress If `true`, compresses the sending data
+   * @return  This Namespace
+   */
+  compress(compress: boolean): SocketIO$Namespace
 }
 
 
@@ -475,195 +475,195 @@ different return)
 */
 declare type SocketIO$Socket = {
 
+  /**
+   * The namespace that this socket is for
+   */
+  nsp: SocketIO$Namespace,
+
+  /**
+   * The Server that our namespace is in
+   */
+  server: SocketIO$Server,
+
+  /**
+   * The Adapter that we use to handle our rooms
+   */
+  adapter: SocketIO$Adapter,
+
+  /**
+   * The unique ID for this Socket. Regenerated at every connection. This is
+   * also the name of the room that the Socket automatically joins on connection
+   */
+  id: string,
+
+  /**
+   * The http.IncomingMessage request sent with the connection. Useful
+   * for recovering headers etc
+   */
+  request: any,
+
+  /**
+   * The Client associated with this Socket
+   */
+  client: SocketIO$Client,
+
+  /**
+   * The underlying Engine.io Socket instance
+   */
+  conn: SocketIO$EngineSocket,
+
+  /**
+   * The list of rooms that this Socket is currently in, where
+   * the ID the the room ID
+   */
+  rooms: {
+    [id: string]: string
+  },
+
+  /**
+   * Is the Socket currently connected?
+   */
+  connected: boolean,
+
+  /**
+   * Is the Socket currently disconnected?
+   */
+  disconnected: boolean,
+
+  /**
+   * The object used when negociating the handshake
+   */
+  handshake: {
+
     /**
-     * The namespace that this socket is for
+     * The headers passed along with the request. e.g. 'host',
+     * 'connection', 'accept', 'referer', 'cookie'
      */
-    nsp: SocketIO$Namespace,
+    headers: any,
 
     /**
-     * The Server that our namespace is in
+     * The current time, as a string
      */
-    server: SocketIO$Server,
+    time: string,
 
     /**
-     * The Adapter that we use to handle our rooms
+     * The remote address of the connection request
      */
-    adapter: SocketIO$Adapter,
+    address: string,
 
     /**
-     * The unique ID for this Socket. Regenerated at every connection. This is
-     * also the name of the room that the Socket automatically joins on connection
+     * Is this a cross-domain request?
      */
-    id: string,
+    xdomain: boolean,
 
     /**
-     * The http.IncomingMessage request sent with the connection. Useful
-     * for recovering headers etc
+     * Is this a secure request?
      */
-    request: any,
+    secure: boolean,
 
     /**
-     * The Client associated with this Socket
+     * The timestamp for when this was issued
      */
-    client: SocketIO$Client,
+    issued: number,
 
     /**
-     * The underlying Engine.io Socket instance
+     * The request url
      */
-    conn: SocketIO$EngineSocket,
+    url: string,
 
     /**
-     * The list of rooms that this Socket is currently in, where
-     * the ID the the room ID
+     * Any query string parameters in the request url
      */
-    rooms: {
-        [id: string]: string
-    },
+    query: any
+  },
 
-    /**
-     * Is the Socket currently connected?
-     */
-    connected: boolean,
+  /**
+   * Sets the 'json' flag when emitting an event
+   */
+  json: SocketIO$Socket,
 
-    /**
-     * Is the Socket currently disconnected?
-     */
-    disconnected: boolean,
+  /**
+   * Sets the 'volatile' flag when emitting an event. Volatile messages are
+   * messages that can be dropped because of network issues and the like. Use
+  for high-volume/real-time messages where you don't need to receive all
+  of them
+  */
+  volatile: SocketIO$Socket,
 
-    /**
-     * The object used when negociating the handshake
-     */
-    handshake: {
+  /**
+   * Sets the 'broadcast' flag when emitting an event. Broadcasting an event
+   * will send it to all the other sockets in the namespace except for yourself
+   */
+  broadcast: SocketIO$Socket,
 
-        /**
-         * The headers passed along with the request. e.g. 'host',
-         * 'connection', 'accept', 'referer', 'cookie'
-         */
-        headers: any,
+  /**
+   * Targets a room when broadcasting
+   * @param room The name of the room that we're targeting
+   * @return  This Socket
+   */
+  to(room: string): SocketIO$Socket,
 
-        /**
-         * The current time, as a string
-         */
-        time: string,
+  /**
+   *
+   * @see  to( room )
+   */
+  in(room: string): SocketIO$Socket,
 
-        /**
-         * The remote address of the connection request
-         */
-        address: string,
+  /**
+   * Sends a 'message' event
+   * @see  emit( event, ...args )
+   */
+  send(...args: any[]): SocketIO$Socket,
 
-        /**
-         * Is this a cross-domain request?
-         */
-        xdomain: boolean,
+  /**
+   *
+   * @see  send( ...args )
+   */
+  write(...args: any[]): SocketIO$Socket,
 
-        /**
-         * Is this a secure request?
-         */
-        secure: boolean,
+  /**
+   * Joins a room. You can join multiple rooms, and by default, on connection,
+   * you join a room with the same name as your ID
+   * @param name The name of the room that we want to join
+   * @param fn An optional callback to call when we've joined the room. It should
+  take an optional parameter, err, of a possible error
+   * @return  This Socket
+  */
+  join(name: string, fn?: (err?: any) => void): SocketIO$Socket,
 
-        /**
-         * The timestamp for when this was issued
-         */
-        issued: number,
+  /**
+   * Leaves a room
+   * @param name The name of the room to leave
+   * @param fn An optional callback to call when we've left the room. It should
+  take on optional parameter, err, of a possible error
+  */
+  leave(name: string, fn?: Function): SocketIO$Socket,
 
-        /**
-         * The request url
-         */
-        url: string,
+  /**
+   * Leaves all the rooms that we've joined
+   */
+  leaveAll(): void,
 
-        /**
-         * Any query string parameters in the request url
-         */
-        query: any
-    },
+  /**
+   * Disconnects this Socket
+   * @param close If true, also closes the underlying connection
+   * @return  This Socket
+   */
+  disconnect(close?: boolean): SocketIO$Socket,
 
-    /**
-     * Sets the 'json' flag when emitting an event
-     */
-    json: SocketIO$Socket,
+  /**
+   * Returns all the callbacks for a particular event
+   * @param event The event that we're looking for the callbacks of
+   * @return  An array of callback Functions, or an empty array if we don't have any
+   */
+  listeners(event: string): Function[],
 
-    /**
-     * Sets the 'volatile' flag when emitting an event. Volatile messages are
-     * messages that can be dropped because of network issues and the like. Use
-    for high-volume/real-time messages where you don't need to receive all
-    of them
-    */
-    volatile: SocketIO$Socket,
-
-    /**
-     * Sets the 'broadcast' flag when emitting an event. Broadcasting an event
-     * will send it to all the other sockets in the namespace except for yourself
-     */
-    broadcast: SocketIO$Socket,
-
-    /**
-     * Targets a room when broadcasting
-     * @param room The name of the room that we're targeting
-     * @return  This Socket
-     */
-    to(room: string): SocketIO$Socket,
-
-    /**
-     *
-     * @see  to( room )
-     */
-    in (room: string): SocketIO$Socket,
-
-    /**
-     * Sends a 'message' event
-     * @see  emit( event, ...args )
-     */
-    send(...args: any[]): SocketIO$Socket,
-
-    /**
-     *
-     * @see  send( ...args )
-     */
-    write(...args: any[]): SocketIO$Socket,
-
-    /**
-     * Joins a room. You can join multiple rooms, and by default, on connection,
-     * you join a room with the same name as your ID
-     * @param name The name of the room that we want to join
-     * @param fn An optional callback to call when we've joined the room. It should
-    take an optional parameter, err, of a possible error
-     * @return  This Socket
-    */
-    join(name: string, fn?: (err?: any) => void): SocketIO$Socket,
-
-    /**
-     * Leaves a room
-     * @param name The name of the room to leave
-     * @param fn An optional callback to call when we've left the room. It should
-    take on optional parameter, err, of a possible error
-    */
-    leave(name: string, fn?: Function): SocketIO$Socket,
-
-    /**
-     * Leaves all the rooms that we've joined
-     */
-    leaveAll(): void,
-
-    /**
-     * Disconnects this Socket
-     * @param close If true, also closes the underlying connection
-     * @return  This Socket
-     */
-    disconnect(close?: boolean): SocketIO$Socket,
-
-    /**
-     * Returns all the callbacks for a particular event
-     * @param event The event that we're looking for the callbacks of
-     * @return  An array of callback Functions, or an empty array if we don't have any
-     */
-    listeners(event: string): Function[],
-
-    /**
-     * Sets the compress flag
-     * @param compress If `true`, compresses the sending data
-     * @return  This Socket
-     */
-    compress(compress: boolean): SocketIO$Socket
+  /**
+   * Sets the compress flag
+   * @param compress If `true`, compresses the sending data
+   * @return  This Socket
+   */
+  compress(compress: boolean): SocketIO$Socket
 }
 
 
@@ -672,76 +672,76 @@ declare type SocketIO$Socket = {
  */
 declare type SocketIO$Adapter = {
 
-    /**
-     * The namespace that this adapter is for
-     */
-    nsp: SocketIO$Namespace,
+  /**
+   * The namespace that this adapter is for
+   */
+  nsp: SocketIO$Namespace,
 
-    /**
-     * A dictionary of all the rooms that we have in this namespace
-     * The rooms are made of a `sockets` key which is the dictionary of sockets per ID
-     */
-    rooms: {
-        [room: string]: {
-            sockets: {
-                [id: string]: boolean
-            },
-            length: number
-        }
-    },
+  /**
+   * A dictionary of all the rooms that we have in this namespace
+   * The rooms are made of a `sockets` key which is the dictionary of sockets per ID
+   */
+  rooms: {
+    [room: string]: {
+      sockets: {
+        [id: string]: boolean
+      },
+      length: number
+    }
+  },
 
-    /**
-     * A dictionary of all the socket ids that we're dealing with, and all
-     * the rooms that the socket is currently in
-     */
-    sids: {
-        [id: string]: {
-            [room: string]: boolean
-        }
-    },
+  /**
+   * A dictionary of all the socket ids that we're dealing with, and all
+   * the rooms that the socket is currently in
+   */
+  sids: {
+    [id: string]: {
+      [room: string]: boolean
+    }
+  },
 
-    /**
-     * Adds a socket to a room. If the room doesn't exist, it's created
-     * @param id The ID of the socket to add
-     * @param room The name of the room to add the socket to
-     * @param callback An optional callback to call when the socket has been
-    added. It should take an optional parameter, error, if there was a problem
-    */
-    add(id: string, room: string, callback?: (err?: any) => void): void,
+  /**
+   * Adds a socket to a room. If the room doesn't exist, it's created
+   * @param id The ID of the socket to add
+   * @param room The name of the room to add the socket to
+   * @param callback An optional callback to call when the socket has been
+  added. It should take an optional parameter, error, if there was a problem
+  */
+  add(id: string, room: string, callback?: (err?: any) => void): void,
 
-    /**
-     * Removes a socket from a room. If there are no more sockets in the room,
-     * the room is deleted
-     * @param id The ID of the socket that we're removing
-     * @param room The name of the room to remove the socket from
-     * @param callback An optional callback to call when the socket has been
-    removed. It should take on optional parameter, error, if there was a problem
-    */
-    del(id: string, room: string, callback?: (err?: any) => void): void,
+  /**
+   * Removes a socket from a room. If there are no more sockets in the room,
+   * the room is deleted
+   * @param id The ID of the socket that we're removing
+   * @param room The name of the room to remove the socket from
+   * @param callback An optional callback to call when the socket has been
+  removed. It should take on optional parameter, error, if there was a problem
+  */
+  del(id: string, room: string, callback?: (err?: any) => void): void,
 
-    /**
-     * Removes a socket from all the rooms that it's joined
-     * @param id The ID of the socket that we're removing
-     */
-    delAll(id: string): void,
+  /**
+   * Removes a socket from all the rooms that it's joined
+   * @param id The ID of the socket that we're removing
+   */
+  delAll(id: string): void,
 
-    /**
-     * Broadcasts a packet
-     * @param packet The packet to broadcast
-     * @param opts Any options to send along:
-    - rooms: An optional list of rooms to broadcast to. If empty, the packet is broadcast to all sockets
-    - except: A list of Socket IDs to exclude
-    - flags: Any flags that we want to send along ('json', 'volatile', 'broadcast')
-    */
-    broadcast(
-        packet: any,
-        opts: {
-            rooms?: string[],
-            except?: string[],
-            flags?: {
-                [flag: string]: boolean
-            }
-        }): void
+  /**
+   * Broadcasts a packet
+   * @param packet The packet to broadcast
+   * @param opts Any options to send along:
+  - rooms: An optional list of rooms to broadcast to. If empty, the packet is broadcast to all sockets
+  - except: A list of Socket IDs to exclude
+  - flags: Any flags that we want to send along ('json', 'volatile', 'broadcast')
+  */
+  broadcast(
+    packet: any,
+    opts: {
+      rooms?: string[],
+      except?: string[],
+      flags?: {
+        [flag: string]: boolean
+      }
+    }): void
 }
 
 
@@ -750,42 +750,42 @@ declare type SocketIO$Adapter = {
  */
 declare interface SocketIO$Client {
 
-    /**
-     * The Server that this client belongs to
-     */
-    server: SocketIO$Server,
+  /**
+   * The Server that this client belongs to
+   */
+  server: SocketIO$Server,
 
-    /**
-     * The underlying Engine.io Socket instance
-     */
-    conn: SocketIO$EngineSocket,
+  /**
+   * The underlying Engine.io Socket instance
+   */
+  conn: SocketIO$EngineSocket,
 
-    /**
-     * The ID for this client. Regenerated at every connection
-     */
-    id: string,
+  /**
+   * The ID for this client. Regenerated at every connection
+   */
+  id: string,
 
-    /**
-     * The http.IncomingMessage request sent with the connection. Useful
-     * for recovering headers etc
-     */
-    request: any,
+  /**
+   * The http.IncomingMessage request sent with the connection. Useful
+   * for recovering headers etc
+   */
+  request: any,
 
-    /**
-     * The dictionary of sockets currently connect via this client (i.e. to different
-     * namespaces) where the Socket ID is the key
-     */
-    sockets: {
-        [id: string]: SocketIO$Socket
-    },
+  /**
+   * The dictionary of sockets currently connect via this client (i.e. to different
+   * namespaces) where the Socket ID is the key
+   */
+  sockets: {
+    [id: string]: SocketIO$Socket
+  },
 
-    /**
-     * A dictionary of all the namespaces for this client, with the Socket that
-     * deals with that namespace
-     */
-    nsps: {
-        [nsp: string]: SocketIO$Socket
-    }
+  /**
+   * A dictionary of all the namespaces for this client, with the Socket that
+   * deals with that namespace
+   */
+  nsps: {
+    [nsp: string]: SocketIO$Socket
+  }
 }
 
 
@@ -794,38 +794,38 @@ declare interface SocketIO$Client {
  */
 declare type SocketIO$EngineSocket = {
 
-    /**
-     * The ID for this socket - matches Client.id
-     */
-    id: string,
+  /**
+   * The ID for this socket - matches Client.id
+   */
+  id: string,
 
-    /**
-     * The Engine.io Server for this socket
-     */
-    server: any,
+  /**
+   * The Engine.io Server for this socket
+   */
+  server: any,
 
-    /**
-     * The ready state for the client. Either 'opening', 'open', 'closing', or 'closed'
-     */
-    readyState: string,
+  /**
+   * The ready state for the client. Either 'opening', 'open', 'closing', or 'closed'
+   */
+  readyState: string,
 
-    /**
-     * The remote IP for this connection
-     */
-    remoteAddress: string,
+  /**
+   * The remote IP for this connection
+   */
+  remoteAddress: string,
 
-    /**
-     * whether the transport has been upgraded
-     */
-    upgraded: boolean,
+  /**
+   * whether the transport has been upgraded
+   */
+  upgraded: boolean,
 
-    /**
-     * (http.IncomingMessage): request that originated the Socket
-     */
-    request: any,
+  /**
+   * (http.IncomingMessage): request that originated the Socket
+   */
+  request: any,
 
-    /**
-     * (Transport): transport reference
-     */
-    transport: any
+  /**
+   * (Transport): transport reference
+   */
+  transport: any
 }
