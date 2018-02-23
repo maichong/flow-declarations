@@ -12,6 +12,11 @@ declare module fsd {
     start?: number; // ! fsd-oss 不支持 start
   }
 
+  declare interface FileMetadata {
+    size?: number;
+    lastModified?: Date;
+  }
+
   declare type Task = string;
   declare type Part = string;
 
@@ -37,6 +42,8 @@ declare module fsd {
     exists(): Promise<boolean>;
     isFile(): Promise<boolean>;
     isDirectory(): Promise<boolean>;
+    size(): Promise<number>;
+    lastModified(): Promise<Date>;
     initMultipartUpload(partCount: number): Promise<Task[]>;
     writePart(partTask: Task, data: string | Buffer | stream$Readable, size?: number): Promise<Part>;
     completeMultipartUpload(parts: Part[]): Promise<void>;
@@ -52,13 +59,15 @@ declare module fsd {
     createWriteStream(path: string, options?: WriteStreamOptions): Promise<stream$Writable>;
     unlink(path: string): Promise<void>;
     mkdir(path: string, prefix?: boolean): Promise<void>;
-    readdir(path: string, recursion?: true | string | Object): Promise<string[]>;
+    readdir(path: string, recursion?: true | string | Object): Promise<Array<{ name: string, metadata?: FileMetadata }>>;
     createUrl(path: string): Promise<string>;
     copy(path: string, dest: string): Promise<void>;
     rename(path: string, dest: string): Promise<void>;
     exists(path: string): Promise<boolean>;
     isFile(path: string): Promise<boolean>;
     isDirectory(path: string): Promise<boolean>;
+    size(path: string): Promise<number>;
+    lastModified(path: string): Promise<Date>;
     initMultipartUpload(path: string, partCount: number): Promise<Task[]>;
     writePart(path: string, partTask: Task, data: stream$Readable, size: number): Promise<Part>;
     completeMultipartUpload(path: string, parts: Part[]): Promise<void>;
