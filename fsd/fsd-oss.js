@@ -3,7 +3,6 @@ import type { Adapter } from 'fsd';
 declare module 'fsd-fs' {
   declare interface OSSAdapterOptions {
     root?: string;
-    urlPrefix?: string;
     accessKeyId: string;
     accessKeySecret: string;
     stsToken?: string;

@@ -17,6 +17,14 @@ declare module fsd {
     lastModified?: Date;
   }
 
+  declare interface CreateUrlOptions {
+    expires?: number;
+    response?: {
+      'content-type'?: string;
+      'content-disposition'?: string;
+    }
+  }
+
   declare type Task = string;
   declare type Part = string;
 
@@ -36,7 +44,7 @@ declare module fsd {
     unlink(): Promise<void>;
     mkdir(prefix?: boolean): Promise<void>;
     readdir(recursion?: true | string): Promise<FSDFile[]>;
-    createUrl(): Promise<string>;
+    createUrl(options?: CreateUrlOptions): Promise<string>;
     copy(dest: string): Promise<FSDFile>;
     rename(dest: string): Promise<void>;
     exists(): Promise<boolean>;
@@ -60,7 +68,7 @@ declare module fsd {
     unlink(path: string): Promise<void>;
     mkdir(path: string, prefix?: boolean): Promise<void>;
     readdir(path: string, recursion?: true | string | Object): Promise<Array<{ name: string, metadata?: FileMetadata }>>;
-    createUrl(path: string): Promise<string>;
+    createUrl(path: string, options?: CreateUrlOptions): Promise<string>;
     copy(path: string, dest: string): Promise<void>;
     rename(path: string, dest: string): Promise<void>;
     exists(path: string): Promise<boolean>;
