@@ -1,4 +1,4 @@
-// Convented from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/mz
+// Converted from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/mz
 
 import * as child_process from "child_process";
 import * as crypto from "crypto";

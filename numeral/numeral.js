@@ -1,4 +1,4 @@
-// Convented from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/numeral/index.d.ts
+// Converted from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/numeral/index.d.ts
 
 declare module 'numeral' {
 

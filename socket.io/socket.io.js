@@ -615,6 +615,8 @@ declare type SocketIO$Socket = {
    */
   send(...args: any[]): SocketIO$Socket,
 
+  emit(event: string, ...args: any[]): SocketIO$Socket,
+
   /**
    *
    * @see  send( ...args )

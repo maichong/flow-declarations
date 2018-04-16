@@ -1,4 +1,4 @@
-// Convented from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/minimatch
+// Converted from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/minimatch
 
 declare module minimatch {
 

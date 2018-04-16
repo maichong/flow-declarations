@@ -1,4 +1,4 @@
-// Convented from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/glob
+// Converted from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/glob
 
 import type { Stats } from 'fs';
 import type { Options as MinimatchOptions, Minimatch } from 'minimatch';

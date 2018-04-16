@@ -1,4 +1,4 @@
-// Convented from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/color
+// Converted from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/color
 // for color 2.0
 
 declare module 'color' {

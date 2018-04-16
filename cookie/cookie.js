@@ -1,4 +1,4 @@
-// Convented from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/cookie/index.d.ts
+// Converted from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/cookie/index.d.ts
 
 declare module cookie {
   declare interface CookieSerializeOptions {

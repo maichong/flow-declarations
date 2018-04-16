@@ -1,4 +1,4 @@
-// Convented from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/redis
+// Converted from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/redis
 
 declare module redis {
   declare interface ErrnoError extends Error {

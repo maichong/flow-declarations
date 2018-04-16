@@ -1,4 +1,4 @@
-// Convented from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/ip
+// Converted from https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/ip
 
 declare module ip {
   declare interface NodeBuffer {

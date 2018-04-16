@@ -358,6 +358,7 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
   db: Mongoose$Connection;
   collection: Mongoose$Collection;
 
+  static collection: Mongoose$Connection;
   static remove(conditions: Object, callback?: Function): Alaska$Query<void>;
   static find(conditions?: Object, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M[]>;
   static findById(id: Object | string | number, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
@@ -428,7 +429,6 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
   static noupdate: boolean;
   static noremove: boolean;
   static noexport: boolean;
-  static collection?: string;
   static groups: {
     [key: string]: Alaska$FieldGroup
   };
