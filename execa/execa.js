@@ -89,7 +89,7 @@ declare module execa {
      *
      * @see https://nodejs.org/api/child_process.html#child_process_options_stdio
      */
-    stdio?: 'pipe' | 'ignore' | 'inherit' | StdIOOption[];
+    +stdio?: 'pipe' | 'ignore' | 'inherit' | StdIOOption[];
     /**
      * Prepare child to run independently of its parent process.
      * Specific behavior depends on the platform.
