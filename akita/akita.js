@@ -1,6 +1,5 @@
-// for akita 0.3.7
 
-type Akita$PaginateResult<T> = {
+type akita$PaginateResult<T> = {
   total: number,
   page: number,
   limit: number,
@@ -11,22 +10,11 @@ type Akita$PaginateResult<T> = {
   results: T[]
 }
 
-declare class Akita$Model<+T> {
-  create(data: Object): Akita$Query<T>;
-  update(data?: Object): Akita$Query<T>;
-  update(id: string | number, data: Object): Akita$Query<T>;
-  remove(conditions?: Object | string | number): Akita$Query<void>;
-  count(conditions?: Object): Akita$Query<number>;
-  paginate(conditions?: Object): Akita$Query<Akita$PaginateResult<T>>;
-  find(conditions?: Object): Akita$Query<T[]>;
-  findById(conditions: number | string): Akita$Query<T | null>;
-  findOne(conditions?: Object): Akita$Query<T | null>;
-  findAll(conditions?: Object): Akita$Query<T[]>;
-}
+type akita$Inspect = { url: string } & akita$RequestInit;
 
-declare class Akita$Query<+R> extends Promise<R> {
-  param(key: Object): this;
-  param(key: string, value: any): this;
+declare class akita$Query<R> extends Promise<R> {
+  arg(args: Object): this;
+  arg(key: string, value: any): this;
 
   search(keyword: string): this;
 
@@ -48,45 +36,79 @@ declare class Akita$Query<+R> extends Promise<R> {
   page(size: number): this;
   sort(sortBy: string): this;
 
-  inspect(): Object;
+  inspect(): akita$Inspect;
 }
 
-type Akita$RequestInit = {
+type akita$RequestInit = {
   method?: string,
-  params?: Object,
+  query?: Object,
   body?: any,
   headers?: Object,
   mode?: string,
   credentials?: string,
 }
 
-declare class Akita$Result<+R> extends Promise<R> {
+declare class akita$Response<R> extends Promise<R> {
   response(): Promise<Object>;
+  stream(): Promise<stream$Readable>;
+  ok(): Promise<boolean>;
+  status(): Promise<number>;
+  statusText(): Promise<string>;
+  size(): Promise<number>;
+  headers(): Promise<Headers>;
   buffer(): Promise<Buffer>;
+  blob(): Promise<Blob>;
   text(): Promise<String>;
   json(): Promise<Object>;
 }
 
-type Akita$Client = {
-  setOptions(options: Object): void;
-  create(options: Object): Akita$Client;
-  resolve(key: string): Akita$Client;
-  request(path: string, init?: Akita$RequestInit, query?: Akita$Query<any>, inspect?: boolean): Akita$Result<any>;
-  get(path: string, init?: Akita$RequestInit): Akita$Result<Object>;
-  post(path: string, init?: Akita$RequestInit): Akita$Result<Object>;
-  upload(path: string, init?: Akita$RequestInit): Akita$Result<Object>;
-  put(path: string, init?: Akita$RequestInit): Akita$Result<Object>;
-  patch(path: string, init?: Akita$RequestInit): Akita$Result<Object>;
-  delete(path: string, init?: Akita$RequestInit): Akita$Result<Object>;
-  head(path: string, init?: Akita$RequestInit): Akita$Result<null>;
-  options(path: string, init?: Akita$RequestInit): Akita$Result<null>;
-  trace(path: string, init?: Akita$RequestInit): Akita$Result<null>;
-  connect(path: string, init?: Akita$RequestInit): Akita$Result<null>;
+declare class akita$HttpMixed {
+  get(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  post(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  upload(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  put(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  patch(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  delete(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  head(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
+  options(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
+};
 
-  (path: string): Akita$Model<Object>;
+declare class akita$Model<T> extends akita$HttpMixed {
+  static create(data: Object): akita$Query<T>;
+  static update(data?: Object): akita$Query<T>;
+  static update(id: string | number, data: Object): akita$Query<T>;
+  static remove(conditions?: Object | string | number): akita$Query<void>;
+  static count(conditions?: Object): akita$Query<number>;
+  static paginate(conditions?: Object): akita$Query<akita$PaginateResult<T>>;
+  static find(conditions?: Object): akita$Query<T[]>;
+  static findById(conditions: number | string): akita$Query<T | null>;
+  static findOne(conditions?: Object): akita$Query<T | null>;
+  static findAll(conditions?: Object): akita$Query<T[]>;
+  static request(path: string, init?: akita$RequestInit, query?: akita$Query<*> | null, inspect?: boolean): akita$Response<Object>;
+  static get(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  static post(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  static upload(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  static put(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  static patch(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  static delete(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  static head(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
+  static options(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
+  constructor(data?: Object): void;
+  request(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
+  save(): Promise<void>;
+  remove(): Promise<void>;
+}
+
+declare type akita$Client = akita$HttpMixed & {
+  setOptions(options: Object): void;
+  create(options: Object): akita$Client;
+  resolve(key: string): akita$Client;
+  request(path: string, init?: akita$RequestInit, query?: akita$Query<any>, inspect?: boolean): akita$Response<any>;
+  latest?: akita$Inspect;
+  (path: string): akita$Model<Object>;
 }
 
 declare module 'akita' {
-  declare module .exports: Akita$Client
-;
+  declare export var Model: typeof akita$Model;
+  declare export default akita$Client
 }
