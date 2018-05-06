@@ -93,7 +93,7 @@ declare class akita$Model<T> extends akita$HttpMixed {
   static delete(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
   static head(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
   static options(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
-  constructor(data?: Object): void;
+  constructor(data?: Object, params?: Object): void;
   request(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
   save(): Promise<void>;
   remove(): Promise<void>;
