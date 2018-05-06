@@ -105,7 +105,7 @@ declare type akita$Client = akita$HttpMixed & {
   resolve(key: string): akita$Client;
   request(path: string, init?: akita$RequestInit, query?: akita$Query<any>, inspect?: boolean): akita$Response<any>;
   latest?: akita$Inspect;
-  (path: string): akita$Model<Object>;
+  (path: string): Class<akita$Model<Object>>;
 }
 
 declare module 'akita' {
