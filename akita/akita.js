@@ -81,7 +81,7 @@ declare class akita$Model<T> extends akita$HttpMixed {
   static count(conditions?: Object): akita$Query<number>;
   static paginate(conditions?: Object): akita$Query<akita$PaginateResult<T>>;
   static find(conditions?: Object): akita$Query<T[]>;
-  static findById(conditions: number | string): akita$Query<T | null>;
+  static findByPk(conditions: number | string): akita$Query<T | null>;
   static findOne(conditions?: Object): akita$Query<T | null>;
   static findAll(conditions?: Object): akita$Query<T[]>;
   static request(path: string, init?: akita$RequestInit, query?: akita$Query<*> | null, inspect?: boolean): akita$Response<Object>;
