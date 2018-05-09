@@ -1,6 +1,6 @@
 import type { Adapter } from 'fsd';
 
-declare module 'fsd-fs' {
+declare module 'fsd-oss' {
   declare interface OSSAdapterOptions {
     root?: string;
     accessKeyId: string;
