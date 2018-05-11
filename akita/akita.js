@@ -96,7 +96,7 @@ declare class akita$Model<T> extends akita$HttpMixed {
   constructor(data?: Object, params?: Object): void;
   request(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
   save(): Promise<void>;
-  remove(): Promise<void>;
+  remove(init?: akita$RequestInit): Promise<void>;
 }
 
 declare type akita$Client = akita$HttpMixed & {
