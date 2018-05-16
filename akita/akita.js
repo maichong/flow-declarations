@@ -69,8 +69,6 @@ declare class akita$HttpMixed {
   put(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
   patch(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
   delete(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
-  head(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
-  options(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
 };
 
 declare class akita$Model<T> extends akita$HttpMixed {
@@ -91,8 +89,6 @@ declare class akita$Model<T> extends akita$HttpMixed {
   static put(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
   static patch(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
   static delete(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
-  static head(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
-  static options(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<null>;
   constructor(data?: Object, params?: Object): void;
   request(path: string, init?: akita$RequestInit, inspect?: boolean): akita$Response<Object>;
   save(): Promise<void>;

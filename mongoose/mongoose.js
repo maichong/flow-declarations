@@ -418,7 +418,10 @@ declare class Mongoose$Query<Result, Doc> extends Promise<Result> {
 
 declare class Mongoose$QueryCursor<Doc> {
   on(type: "data" | "end" | string, cb: Function): void;
-  eachAsync(fn:Function, options?: Object, callback?:Function): Promise<void>;
+  eachAsync(fn: Function): Promise<void>;
+  eachAsync(fn: Function, options: Object, callback?:Function): Promise<void>;
+  eachAsync(fn: Function, parallel: number, callback?:Function): Promise<void>;
+  eachAsync(fn: Function, options: Object, parallel: number, callback?:Function): Promise<void>;
   next(cb?: (err: Error, doc: Doc) => void): Promise<?Doc>;
 }
 
