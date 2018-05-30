@@ -89,7 +89,7 @@ declare type Alaska$Context = Context & {
   try: <T>(promise: Promise<T>) => Promise<T>;
   sendfile: (filePath: string, options: Object) => Promise<void>;
   t: ((message: string, locale?: string, values?: Object) => string) &
-    ((message: string, values: Object) => string);
+  ((message: string, values: Object) => string);
   show: (template: string, state?: Object) => Promise<string>;
   toJSON: () => Object;
 };
@@ -242,7 +242,7 @@ declare type Alaska$Data<M> = {
   [key: string]: any;
   pick(...fields: string[]): Alaska$Data<M>;
   omit(...fields: string[]): Alaska$Data<M>;
-  getRecord(): Alaska$Model<M>;
+  getRecord(): M;
 }
 
 declare type Alaska$Model$relationships = {
@@ -281,14 +281,14 @@ declare type Alaska$Model$action = {
   list?: boolean,
   needRecords?: number,
   ability?: string | (data: Object) => string,
-  super?: DependsQueryExpression,
-  hidden?: DependsQueryExpression,
-  depends?: DependsQueryExpression,
-  disabled?: DependsQueryExpression,
-  confirm?: string,
-  pre?: string,
-  script?: string,
-  post?: string
+    super?: DependsQueryExpression,
+    hidden ?: DependsQueryExpression,
+    depends ?: DependsQueryExpression,
+    disabled ?: DependsQueryExpression,
+    confirm ?: string,
+    pre ?: string,
+    script ?: string,
+    post ?: string
 };
 
 declare type Alaska$Model$actions = {
@@ -302,10 +302,10 @@ declare interface Alaska$FieldGroup {
   style?: Alaska$style,
   wrapper?: string, // 自定义Wrapper占位符
   ability?: string | (data: Object) => string,
-  super?: DependsQueryExpression,
-  hidden?: DependsQueryExpression,
-  depends?: DependsQueryExpression,
-  disabled?: DependsQueryExpression,
+    super?: DependsQueryExpression,
+    hidden ?: DependsQueryExpression,
+    depends ?: DependsQueryExpression,
+    disabled ?: DependsQueryExpression,
 }
 
 type UpdateResult = {
@@ -315,9 +315,9 @@ type UpdateResult = {
   ok?: boolean
 };
 
-declare class Alaska$Model<+M> extends events$EventEmitter {
+declare class Alaska$Model<+M > extends events$EventEmitter {
 
-[field: string]: any;
+  [field: string]: any;
 
   // extends of Mongoose$Document
   schema: Mongoose$Schema<*>;
@@ -326,31 +326,31 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
   _id: any;
   errors: Object[];
 
-  constructor(obj?: Object, fields?: Object, skipId?: boolean): void;
-  init(doc: Object, opts?: Object, fn?: Function): this;
+  constructor(obj ?: Object, fields ?: Object, skipId ?: boolean): void;
+  init(doc: Object, opts ?: Object, fn ?: Function): this;
   update(doc: Object, options: Object, fn: Function): Alaska$Query<M>;
-  set(path: string | Object, val: any, type?: any, options?: Object): this;
-  get(path: string, type?: any): any;
+  set(path: string | Object, val: any, type ?: any, options ?: Object): this;
+  get(path: string, type ?: any): any;
   markModified(path: string): void;
   unmarkModified(path: string): void;
   $ignore(path: string): void;
   modifiedPaths(): string[];
-  isModified(paths?: string | string[]): boolean;
+  isModified(paths ?: string | string[]): boolean;
   $isDefault(path: string): boolean;
   isDirectModified(path: string): boolean;
   isInit(path: string): boolean;
   isSelected(path: string): boolean;
-  validate(options: Object, callback?: Function): Promise<void>;
+  validate(options: Object, callback ?: Function): Promise<void>;
   validateSync(options: Object): Mongoose$MongooseError | void;
-  invalidate(path: string, err: string | Error, val: any, kind?: string): Mongoose$ValidationError;
-  toObject(options?: Object): Object;
-  toJSON(options?: Object): Object;
-  inspect(options?: Object): Object;
+  invalidate(path: string, err: string | Error, val: any, kind ?: string): Mongoose$ValidationError;
+  toObject(options ?: Object): Object;
+  toJSON(options ?: Object): Object;
+  inspect(options ?: Object): Object;
   toString(): string;
   equals(doc: Mongoose$Document): boolean;
-  populate(path?: Object | string, fn?: Function): this;
+  populate(path ?: Object | string, fn ?: Function): this;
   execPopulate(): Promise<Mongoose$Document>;
-  populated(path: string, val?: any, options?: Object): string | void;
+  populated(path: string, val ?: any, options ?: Object): string | void;
   depopulate(path: string): void;
 
   // Alaska$Model
@@ -359,43 +359,43 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
   collection: Mongoose$Collection;
 
   static collection: Mongoose$Connection;
-  static remove(conditions: Object, callback?: Function): Alaska$Query<void>;
-  static find(conditions?: Object, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M[]>;
-  static findById(id: Object | string | number, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
-  static findByIdAndUpdate(id: Object | string | number, update: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
-  static findByIdAndRemove(id: Object | string | number, options?: Object, callback?: Function): Alaska$Query<M | null>;
-  static findOne(conditions?: Object, projection?: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
-  static findOneAndUpdate(conditions: Object, update: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
-  static findOneAndRemove(conditions: Object, options?: Object, callback?: Function): Alaska$Query<M | null>;
-  static update(conditions: Object, doc: Object, options?: Object, callback?: Function): Alaska$Query<UpdateResult>;
-  static count(conditions?: Object, callback?: Function): Alaska$Query<number>;
-  static distinct(field: string, conditions?: Object, callback?: Function): Alaska$Query<M>;
-  static where(path: string | Object, val?: any): Alaska$Query<M>;
+  static remove(conditions: Object, callback ?: Function): Alaska$Query<void>;
+  static find(conditions ?: Object, projection ?: Object, options ?: Object, callback ?: Function): Alaska$Query<M[]>;
+  static findById(id: Object | string | number, projection ?: Object, options ?: Object, callback ?: Function): Alaska$Query<M | null>;
+  static findByIdAndUpdate(id: Object | string | number, update: Object, options ?: Object, callback ?: Function): Alaska$Query<M | null>;
+  static findByIdAndRemove(id: Object | string | number, options ?: Object, callback ?: Function): Alaska$Query<M | null>;
+  static findOne(conditions ?: Object, projection ?: Object, options ?: Object, callback ?: Function): Alaska$Query<M | null>;
+  static findOneAndUpdate(conditions: Object, update: Object, options ?: Object, callback ?: Function): Alaska$Query<M | null>;
+  static findOneAndRemove(conditions: Object, options ?: Object, callback ?: Function): Alaska$Query<M | null>;
+  static update(conditions: Object, doc: Object, options ?: Object, callback ?: Function): Alaska$Query<UpdateResult>;
+  static count(conditions ?: Object, callback ?: Function): Alaska$Query<number>;
+  static distinct(field: string, conditions ?: Object, callback ?: Function): Alaska$Query<M>;
+  static where(path: string | Object, val ?: any): Alaska$Query<M>;
   static $where(js: string | Function): Alaska$Query<M>;
-  static create(doc: Object, fn?: Function): Promise<M>;
-  static create(doc: Object[], fn?: Function): Promise<M[]>;
+  static create(doc: Object, fn ?: Function): Promise<M>;
+  static create(doc: Object[], fn ?: Function): Promise<M[]>;
   static create(...doc: Array<Object | Function>): Promise<M>;
-  static insertMany(doc: Object, fn?: Function): Promise<M>;
-  static insertMany(doc: Object[], fn?: Function): Promise<M[]>;
+  static insertMany(doc: Object, fn ?: Function): Promise<M>;
+  static insertMany(doc: Object[], fn ?: Function): Promise<M[]>;
   static insertMany(...doc: Array<Object | Function>): Promise<M[]>;
   static hydrate(obj: Object): this;
-  static mapReduce(o: Object, callback?: Function): Promise<M>;
-  static geoNear(near: Object | number[], callback?: Function): Promise<M>;
-  static geoSearch(conditions: Object, options?: Object, callback?: Function): Promise<M>;
-  static aggregate(options?: Object, fn?: Function): Mongoose$Aggregate | Promise<M>;
-  static populate(docs: Mongoose$Document | Array<Mongoose$Document>, paths: Object, callback?: Function): Promise<M>;
+  static mapReduce(o: Object, callback ?: Function): Promise<M>;
+  static geoNear(near: Object | number[], callback ?: Function): Promise<M>;
+  static geoSearch(conditions: Object, options ?: Object, callback ?: Function): Promise<M>;
+  static aggregate(options ?: Object, fn ?: Function): Mongoose$Aggregate | Promise<M>;
+  static populate(docs: Mongoose$Document | Array < Mongoose$Document >, paths: Object, callback ?: Function): Promise<M>;
 
-  constructor(obj: Object, fields?: Object, skipId?: boolean): void;
-  save(options?: Object, fn?: Function): Promise<void>;
+  constructor(obj: Object, fields ?: Object, skipId ?: boolean): void;
+  save(options ?: Object, fn ?: Function): Promise<void>;
   increment(): this;
-  remove(options?: Object, fn?: Function): Promise<void>;
-  discriminator(name: string, schema: Mongoose$Schema<*>): Class<Alaska$Model<M>>;
-  ensureIndexes(options?: Object, fn?: Function): Promise<void>;
+  remove(options ?: Object, fn ?: Function): Promise<void>;
+  discriminator(name: string, schema: Mongoose$Schema<*>): Class<M>;
+  ensureIndexes(options ?: Object, fn ?: Function): Promise<void>;
 
   // Alaska$Model
 
   _: { [path: string]: Function };
-  data(scope?: string): Alaska$Data<M>;
+  data(scope ?: string): Alaska$Data<M>;
 
   static _pre: {
     [action: string]: Function[]
@@ -434,20 +434,20 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
   };
   static service: Alaska$Service;
   static db: Mongoose$Connection;
-  static MongooseModel: Alaska$Model<M>;
+  static MongooseModel: M;
   static schema: Mongoose$Schema<*>;
   static prefix: string;
-  static preview: ?string;
-  static quickEditorView: ?boolean;
+  static preview: ? string;
+  static quickEditorView: ? boolean;
   static autoSelect: boolean;
   static defaultScope: { [field: string]: boolean };
-  static defaultSort?: string;
-  static defaultLimit?: number;
+  static defaultSort ?: string;
+  static defaultLimit ?: number;
   static titleField: string;
   static userField: string;
   static searchFields: string[] | string;
   static defaultColumns: string[] | string;
-  static defaultFilters?: Alaska$filters | (ctx: Alaska$Context) => Alaska$filters | Promise<Alaska$filters>;
+  static defaultFilters ?: Alaska$filters | (ctx: Alaska$Context) => Alaska$filters | Promise<Alaska$filters>;
   static scopes: {
     [scope: string]: string | { [field: string]: boolean }
   };
@@ -457,17 +457,17 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
   static _fields: {
     [path: string]: Alaska$Field
   };
-  static virtuals: {};
+  static virtuals: { };
   static api: {
-    paginate?: number,
-    list?: number,
-    show?: number,
-    count?: number,
-    create?: number,
-    update?: number,
-    updateMulti?: number,
-    remove?: number,
-    removeMulti?: number,
+    paginate ?: number,
+      list ?: number,
+      show ?: number,
+      count ?: number,
+      create ?: number,
+      update ?: number,
+      updateMulti ?: number,
+      remove ?: number,
+      removeMulti ?: number,
   };
   static actions: Alaska$Model$actions;
 
@@ -478,18 +478,18 @@ declare class Alaska$Model<+M> extends events$EventEmitter {
   static post(action: string, fn: Function): void;
   static register(): Promise<void>;
   static underscoreMethod(field: string, name: string, fn: Function): void;
-  static createFilters(search: string, filters?: Object | string): Alaska$filters;
-  static createFiltersByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$filters>;
-  static paginate(conditions?: Object): Alaska$PaginateQuery<this>;
-  static paginateByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$PaginateResult<M>>;
-  static listByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$Model<M>[]>;
-  static showByContext(ctx: Alaska$Context, state?: Object): Promise<Alaska$Model<M> | null>;
-  static fromObject(data: Object): Alaska$Model<M>;
-  static fromObjectArray(array: Object[]): Alaska$Model<M>[];
-  static toObjectArray(array: Alaska$Model<M>[]): Object[];
+  static createFilters(search: string, filters ?: Object | string): Alaska$filters;
+  static createFiltersByContext(ctx: Alaska$Context, state ?: Object): Promise<Alaska$filters>;
+  static paginate(conditions ?: Object): Alaska$PaginateQuery<this>;
+  static paginateByContext(ctx: Alaska$Context, state ?: Object): Promise<Alaska$PaginateResult<M>>;
+  static listByContext(ctx: Alaska$Context, state ?: Object): Promise<M[]>;
+  static showByContext(ctx: Alaska$Context, state ?: Object): Promise<M | null>;
+  static fromObject(data: Object): M;
+  static fromObjectArray(array: Object[]): M[];
+  static toObjectArray(array: M[]): Object[];
 }
 
-declare class Alaska$Query<+R> extends Promise<R> {
+declare class Alaska$Query<+R > extends Promise < R > {
   toConstructor(): Alaska$Query<R>;
   distinct(field?: string, conditions?: Object, callback?: Function): Alaska$Query<R>;
   find(conditions?: Object, callback?: Function): Alaska$Query<R[]>;
@@ -574,7 +574,7 @@ declare class Alaska$Query<+R> extends Promise<R> {
   selectedExclusively(): boolean;
 }
 
-declare class Alaska$PaginateQuery<+R> extends Alaska$Query<R> {
+declare class Alaska$PaginateQuery<+R > extends Alaska$Query < R > {
   search(keyword: string): this;
   page(page: number): this;
 }
@@ -586,7 +586,7 @@ declare type Alaska$PaginateResult<M> = {
   totalPage: number;
   next: number;
   previous: number;
-  results: Alaska$Model<M>[]
+  results: M[]
 };
 
 declare class Alaska$Field {
@@ -594,52 +594,52 @@ declare class Alaska$Field {
   static plain: any;
   static dbOptions?: string[];
   static viewOptions?: Array<string | (options: Object, field: Alaska$Field) => void>;
-  static defaultOptions?: Indexed<any>;
+  static defaultOptions ?: Indexed<any>;
 [path: string]: any;
 
-  // Mongoose
-  get: ?Function;
-  set: ?Function;
+// Mongoose
+get: ? Function;
+set: ? Function;
   default: ?any;
-  index: ?boolean;
-  unique: ?boolean;
-  sparse: ?boolean;
-  text: ?boolean;
-  required: ?boolean;
-  select: ?boolean;
-  match?: RegExp;
+index: ? boolean;
+unique: ? boolean;
+sparse: ? boolean;
+text: ? boolean;
+required: ? boolean;
+select: ? boolean;
+match ?: RegExp;
 
-  // Alaska
-  type: Class<Alaska$Field>;
-  defaultValue?: any;
-  dataType: Function;
-  label: string;
-  path: string;
-  ref?: Class<Alaska$Model<*>>;
-  group: ?string;
-  multi: boolean;
-  horizontal: ?boolean;
-  nolabel: ?boolean;
-  ability: ?string | (data: Object) => string;
-  private: boolean;
-  super: ?DependsQueryExpression;
-  hidden: ?DependsQueryExpression;
-  depends: ?DependsQueryExpression;
-  disabled: ?DependsQueryExpression;
-  fixed: ?boolean;
-  help: ?string;
-  cell: ?string | boolean;
-  view: ?string;
-  filter: ?string | boolean;
-  after: ?string;
-  _model: Class<Alaska$Model<*>>;
-  _schema: Mongoose$Schema<*>;
-  _options: Alaska$Field$options;
+// Alaska
+type: Class<Alaska$Field>;
+defaultValue ?: any;
+dataType: Function;
+label: string;
+path: string;
+ref ?: Class<Alaska$Model<*>>;
+group: ? string;
+multi: boolean;
+horizontal: ? boolean;
+nolabel: ? boolean;
+ability: ? string | (data: Object) => string;
+private: boolean;
+super: ?DependsQueryExpression;
+hidden: ? DependsQueryExpression;
+depends: ? DependsQueryExpression;
+disabled: ? DependsQueryExpression;
+fixed: ? boolean;
+help: ? string;
+cell: ? string | boolean;
+view: ? string;
+filter: ? string | boolean;
+after: ? string;
+_model: Class<Alaska$Model<*>>;
+_schema: Mongoose$Schema<*>;
+_options: Alaska$Field$options;
 
-  viewOptions(): { label: string; plain: Object | string };
-  init(): void;
-  underscoreMethod(name: string, fn: Function): void;
-  createFilter(filter: Object, filters: Object): any;
+viewOptions(): { label: string; plain: Object | string };
+init(): void;
+underscoreMethod(name: string, fn: Function): void;
+createFilter(filter: Object, filters: Object): any;
 }
 
 declare type Alaska$Field$options = {
@@ -667,32 +667,32 @@ declare type Alaska$Field$options = {
   horizontal?: boolean;
   nolabel?: boolean;
   ability?: string | (data: Object) => string;
-  private?: boolean;
-  super?: DependsQueryExpression;
-  hidden?: DependsQueryExpression;
-  depends?: DependsQueryExpression;
-  disabled?: DependsQueryExpression;
-  fixed?: boolean;
-  help?: string;
-  cell?: string | boolean;
-  view?: string;
-  filter?: string | boolean;
-  after?: string;
+private ?: boolean;
+super?: DependsQueryExpression;
+hidden ?: DependsQueryExpression;
+depends ?: DependsQueryExpression;
+disabled ?: DependsQueryExpression;
+fixed ?: boolean;
+help ?: string;
+cell ?: string | boolean;
+view ?: string;
+filter ?: string | boolean;
+after ?: string;
 };
 
 declare interface Alaska$SelectField$option {
   +value: string | number | boolean;
-  +label: string;
-  +style?: Alaska$style;
-  +depends?: DependsQueryExpression;
++label: string;
++style ?: Alaska$style;
++depends ?: DependsQueryExpression;
 }
 
 declare interface Alaska$Currency {
   +value: string,
   +label: string,
-  +unit: string,
-  +precision?: number,
-  +default?: boolean
+    +unit: string,
+      +precision ?: number,
+      +default?: boolean
 }
 
 declare class Alaska$Service {
@@ -852,8 +852,8 @@ declare class Alaska$Renderer {
   options: Alaska$Config$renderer;
 
   constructor(service: Alaska$Service, options: Alaska$Config$renderer): void;
-  renderFile (pathName: string, locals: Object): Promise<string>;
-  render (template: string, locals: Object): string;
+  renderFile(pathName: string, locals: Object): Promise<string>;
+  render(template: string, locals: Object): string;
   getFileMap(): { [file: string]: string };
 }
 
@@ -896,5 +896,5 @@ declare module alaska {
 }
 
 declare module 'alaska/utils' {
-  declare module .exports: Alaska$utils
+  declare module.exports: Alaska$utils
 }
