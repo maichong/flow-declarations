@@ -204,7 +204,7 @@ declare module 'koa' {
   };
   // The default props of context come from two files
   // `application.createContext` & `context.js`
-  declare type Context = {
+  declare export type Context = {
     accept: $PropertyType<Request, 'accept'>,
     app: Application,
     cookies: Cookies,
@@ -305,6 +305,5 @@ declare module 'koa' {
     use(fn: Middleware): this,
   }
 
-  declare export type Context = Context;
   declare module.exports: Class<Application>;
 }
