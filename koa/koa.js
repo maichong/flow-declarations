@@ -305,5 +305,6 @@ declare module 'koa' {
     use(fn: Middleware): this,
   }
 
+  declare export type Context = Context;
   declare module.exports: Class<Application>;
 }
