@@ -1,5 +1,3 @@
-// TODO
-
 declare module 'seamless-immutable' {
   declare interface MergeConfig {
     deep?: boolean,
@@ -42,7 +40,7 @@ declare module 'seamless-immutable' {
   declare type ImmutableObject<T> = T & ImmutableObjectMixin<T>;
   
   declare interface ImmutableArrayMixin<T> {
-    flatMap<R>(mapFunction: (item: T) => R[]): ImmutableArray<R>;
+    flatMap<R>(mapFunction: (item: T, index: number, arr: ImmutableArray<R>) => R[]): ImmutableArray<R>;
 
     asObject(fn: (item: T) => [string, any]): ImmutableObject<any>;
 
@@ -61,8 +59,9 @@ declare module 'seamless-immutable' {
     asMutable: (x: any[], opts?: AsMutableOptions) => any[],
 
     // Array
-    flatMap<T>(array:T[], mapFunction: (item: T) => T[]): ImmutableArray<T>,
+    flatMap<T>(array:T[], mapFunction: (item: T, index: number, arr: ImmutableArray<T>) => T[]): ImmutableArray<T>,
     asObject<T>(array:any[], fn: (item: T) => [string, any]): ImmutableObject<any>, 
+    set<T>(data: T[], index: number, value: T | void): T[],
     
     // Object
     merge<T>(collection: Array<any> | Object, config?: MergeConfig): ImmutableObject<T>,
