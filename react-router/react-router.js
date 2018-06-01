@@ -1,4 +1,4 @@
-// copy from https://github.com/flowtype/flow-typed/blob/master/definitions/npm/react-router_v4.x.x/flow_v0.53.x-/react-router_v4.x.x.js
+// Convented from https://github.com/flowtype/flow-typed/blob/master/definitions/npm/react-router_v4.x.x/flow_v0.53.x-/react-router_v4.x.x.js
 
 declare module "react-router" {
   // NOTE: many of these are re-exported by react-router-dom and
@@ -43,17 +43,18 @@ declare module "react-router" {
   };
 
   declare export type Match = {
-    params: { [key: string]: ?string },
+    params: Object,
     isExact: boolean,
     path: string,
     url: string
   };
 
-  declare export type ContextRouter = {|
+  declare export type ContextRouter = {
     history: RouterHistory,
     location: Location,
-    match: Match
-  |};
+    match: Match,
+    staticContext?: StaticRouterContext
+  };
 
   declare export type GetUserConfirmation = (
     message: string,
@@ -107,9 +108,12 @@ declare module "react-router" {
     children?: React$Node
   }> {}
 
-  declare export function withRouter<P>(
-    Component: React$ComponentType<{| ...ContextRouter, ...P |}>
-  ): React$ComponentType<P>;
+  declare export function withRouter<
+    P: Object,
+    CP: $Diff<ContextRouter, P>
+  >(
+    Component: React$ComponentType<P>
+  ): React$ComponentType<CP>;
 
   declare type MatchPathOptions = {
     path?: string,
