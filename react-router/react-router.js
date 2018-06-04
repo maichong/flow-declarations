@@ -112,7 +112,7 @@ declare module "react-router" {
     P: Object,
     CP: $Diff<P, ContextRouter>
   >(
-    Component: React$ComponentType<P> | Class<React$Component<P>>
+    Component: React$ComponentType<P> | Class<React$Component<P, any>>
   ): React$ComponentType<CP>;
 
   declare type MatchPathOptions = {
