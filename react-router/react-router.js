@@ -110,9 +110,9 @@ declare module "react-router" {
 
   declare export function withRouter<
     P: Object,
-    CP: $Diff<ContextRouter, P>
+    CP: $Diff<P, ContextRouter>
   >(
-    Component: React$ComponentType<P>
+    Component: React$ComponentType<P> | Class<React$Component<P>>
   ): React$ComponentType<CP>;
 
   declare type MatchPathOptions = {
