@@ -37,16 +37,16 @@ declare module "react-dnd" {
   >(
     component: C
   ) => Class<
-    ConnectedComponent<C, InstanceOf<C>, { ...CP } & $Diff<$Diff<P, D>, CP>>
+    ConnectedComponent<C, InstanceOf<C>, $Diff<$Diff<P, D>, CP>>
   >) &
     (<P: SP, S, C: Class<React$Component<P, S>>>(
       component: C
     ) => Class<
-      ConnectedComponent<C, InstanceOf<C>, { ...CP } & $Diff<P, CP>>
+      ConnectedComponent<C, InstanceOf<C>, $Diff<P, CP>>
     >) &
     (<P: SP, C: React$StatelessFunctionalComponent<P>>(
       component: C
-    ) => Class<ConnectedComponent<C, void, { ...CP } & $Diff<P, CP>>>);
+    ) => Class<ConnectedComponent<C, void, $Diff<P, CP>>>);
 
   // Drag Source
   // ----------------------------------------------------------------------
