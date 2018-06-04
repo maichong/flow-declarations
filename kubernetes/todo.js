@@ -1,3 +1,4 @@
+declare type Kube$Event = {};
 declare type Kube$NodeAffinity = {};
 declare type Kube$PodAffinity = {};
 declare type Kube$PodAntiAffinity = {};
