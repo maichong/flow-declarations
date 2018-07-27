@@ -4,6 +4,31 @@ declare interface Kube$Affinity {
   podAntiAffinity?: Kube$PodAntiAffinity;
 }
 
+declare type Kube$NodeSelectorRequirement = {
+  key: string;
+  operator: 'In' | 'NotIn' | 'Exists' | 'DoesNotExist' | 'Gt' | 'Lt';
+  values: string[];
+};
+
+declare type Kube$NodeSelectorTerm = {
+  matchExpressions: Kube$NodeSelectorRequirement[];
+  matchFields: Kube$NodeSelectorRequirement[];
+};
+
+declare type Kube$NodeSelector = {
+  nodeSelectorTerms: Kube$NodeSelectorTerm[]
+};
+
+declare type Kube$PreferredSchedulingTerm = {
+  weight: number;
+  preference: Kube$NodeSelectorTerm;
+};
+
+declare type Kube$NodeAffinity = {
+  preferredDuringSchedulingIgnoredDuringExecution: Kube$PreferredSchedulingTerm[];
+  requiredDuringSchedulingIgnoredDuringExecution: Kube$NodeSelector;
+};
+
 declare interface Kube$AttachedVolume {
   devicePath: string;
   name: string;
