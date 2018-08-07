@@ -6,14 +6,14 @@ declare module 'js-yaml' {
     | 'CORE_SCHEMA'
     | 'DEFAULT_FULL_SCHEMA';
 
-  declare interface loadOptions {
+  declare interface LoadOptions {
     filename?: string;
     onWarning?: Function;
     schema?: SCHEMA;
     json?: boolean;
   }
 
-  declare interface dumpOptions {
+  declare interface DumpOptions {
     indent?: number;
     skipInvalid?: boolean;
     flowLevel?: number;
@@ -27,11 +27,11 @@ declare module 'js-yaml' {
   }
 
   declare module .exports: {
-    safeLoad(string: string, options?: loadOptions): Object;
-    load(string: string, options?: loadOptions): Object;
-    safeLoadAll(string: string, iterator?: Function, options?: loadOptions): Object;
-    loadAll(string: string, iterator?: Function, options?: loadOptions): Object;
-    safeDump(object: Object, options?: Object): Object;
-    dump(object: Object, options?: Object): Object;
+    safeLoad(string: string, options?: LoadOptions): Object;
+    load(string: string, options?: LoadOptions): Object;
+    safeLoadAll(string: string, iterator?: Function, options?: LoadOptions): Object[];
+    loadAll(string: string, iterator?: Function, options?: LoadOptions): Object[];
+    safeDump(object: Object, options?: DumpOptions): string;
+    dump(object: Object, options?: DumpOptions): string;
   }
 }
