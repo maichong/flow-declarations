@@ -1,6 +1,6 @@
 {
   "name": "flow-declarations",
-  "version": "0.4.26",
+  "version": "0.4.27",
   "description": "High quality type declarations for flow.js",
   "keywords": [
     "flow",
